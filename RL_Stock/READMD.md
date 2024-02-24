@@ -1,1 +1,0 @@
-- Book: [Foundations of Reinforcement Learning withApplications in Finance, Stanford](https://stanford.edu/~ashlearn/RLForFinanceBook/book.pdf)

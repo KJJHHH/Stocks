@@ -1,1 +1,0 @@
-# See C:\Users\USER\Desktop\Projects Not Now\Week_portfolio\model_reg_analysis.ipynb
