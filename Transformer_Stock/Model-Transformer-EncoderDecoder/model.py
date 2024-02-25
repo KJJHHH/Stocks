@@ -42,7 +42,7 @@ class TransformerModel(nn.Module):
     def __init__(self, ntoken: int = 400, d_model: int = 6, nhead: int = 2, d_hid: int = 128, num_class: int = 1,
                  nlayers_e: int = 16, nlayers_d: int = 6, dropout: float = 0.5):
         super().__init__()
-        self.model_type = 'Transformer'
+        self.model_type = 'Transformer-Encoder-Decoder'
         self.embedding = nn.Embedding(ntoken, d_model)
         self.pos_encoder = PositionalEncoding(d_model, dropout)
         encoder_layers = TransformerEncoderLayer(d_model, nhead, d_hid, dropout)
