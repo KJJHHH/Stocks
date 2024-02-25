@@ -7,6 +7,8 @@ import torch.nn as nn
 class VT_CNN(nn.Module):
     def __init__(self, num_class=2):
         super(VT_CNN, self).__init__()
+        
+        self.model_type = 'Vision-Transformer'
 
         # =======
         # Unet

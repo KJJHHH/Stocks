@@ -36,6 +36,7 @@ class BasicBlock(nn.Module):
 class ResNet(nn.Module):
     def __init__(self, block, layers, num_classes=1):
         super(ResNet, self).__init__()
+        self.model_type = 'ResNet'
         self.in_channels = 64
         self.conv1 = nn.Conv2d(5, 64, kernel_size=3, stride=1, padding=3, bias=False)
         self.bn1 = nn.BatchNorm2d(64)

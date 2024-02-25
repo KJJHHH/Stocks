@@ -5,7 +5,7 @@ from torchaudio.models import Conformer
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class Conformer_CNN(nn.Module):
-    def __init__(self, num_class, conformer = False, res = True):
+    def __init__(self, num_class):
         super(Conformer_CNN, self).__init__()
 
         """self.conv_init1 = nn.Conv2d(in_channels=1, out_channels=16, kernel_size=3, stride=1, padding=1)
@@ -16,7 +16,8 @@ class Conformer_CNN(nn.Module):
         self.conv_init6 = nn.Conv2d(in_channels=16, out_channels=1, kernel_size=3, stride=1, padding=1)
         self.maxpool_u = nn.MaxPool2d(kernel_size=2, stride=2, return_indices=True)"""
 
-
+        self.model_type = 'Conformer-CNN'
+        
         # =======
         # Unet
         self.conv1 = nn.Conv2d(in_channels=5, out_channels=16, kernel_size=3, stride=1, padding=1)

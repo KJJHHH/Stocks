@@ -36,7 +36,7 @@ def fetch_stock_price(stock_symbol, start_date, end_date):
 
 
 # preprocess func
-def window_x_y(df, window_size=100):
+def window_x_y(df, num_class, window_size=100):
     '''
     df: splitted data: train and valid / test
     '''
@@ -46,8 +46,10 @@ def window_x_y(df, window_size=100):
     for i in tqdm(range(len(df)-window_size+1)):
         window = df.iloc[i:i+window_size]  # Extract the window of data
         x1_values = window[['do', 'dh', 'dl', 'dc', 'dv']].T.values  # Adjust column names as needed
-        y1_values = window[['doc_1']].iloc[-1].T.values
-        # y1_values = window[['do_1', 'dc_1']].iloc[-1].T.values
+        if num_class == 1:
+            y1_values = window[['doc_1']].iloc[-1].T.values
+        if num_class == 2:
+            y1_values = window[['do_1', 'dc_1']].iloc[-1].T.values
         x1_list.append(x1_values)
         y1_list.append(y1_values)
         date.append(window.index[-1])
@@ -56,6 +58,12 @@ def window_x_y(df, window_size=100):
     x = np.array(x1_list)
     y = np.array(y1_list)
     return x, y, date
+
+def use_src(df):
+    src = df[['do', 'dh', 'dl', 'dc', 'dv', 'Close']][:2000].T.values
+    src = np.array(src)
+    return src
+    
 
 def process_x(x):
     # gaf
