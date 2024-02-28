@@ -5,14 +5,14 @@ from tqdm import tqdm
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-def test_encoder(model, dataloader):
+def test(model, dataloader):
     
     s_pred = []
     s_true = []
     # print(next(model.parameters()).device)
     with torch.no_grad():
         for x, y in tqdm(dataloader):
-            x = x.permute(2, 0, 1).to(device)
+            x = x.to(device)
             y = y.to(device)
             y_pred = model(x)
             s_pred.append(y_pred.cpu().detach())

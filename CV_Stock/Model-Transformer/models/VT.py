@@ -1,6 +1,12 @@
 import torch
 import torchvision
 import torch.nn as nn
+import sys 
+sys.path.append('../')
+try:
+    from models.Encoding import *
+except:
+    from Encoding import *
 
 # Vision Transformer: https://github.com/pytorch/vision/blob/main/torchvision/models/vision_transformer.py
 # try pretrain, same link above
@@ -33,7 +39,7 @@ class VT_CNN(nn.Module):
         """
         
         x = self.conv_init(x)
-        x_ = x.view(x.size(0), -x.size(1)*x.size(2)*x.size(3))
+        x_ = x.view(x.size(0), x.size(1)*x.size(2)*x.size(3))
         x = self.VisionTransformer(x)
         x = self.ln_init(x)
         x = self.relu(x)        

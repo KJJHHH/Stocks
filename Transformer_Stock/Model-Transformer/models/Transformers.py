@@ -88,9 +88,11 @@ class TransformerEncoderDecoder(nn.Module):
         self.model_type = 'Transformer-Encoder-Decoder'
         self.embedding = nn.Embedding(ntoken, d_model)
         self.pos_encoder = PositionalEncoding(d_model, dropout)
-        encoder_layers = TransformerEncoderLayer(d_model, nhead, d_hid, dropout)
+        encoder_layers = TransformerEncoderLayer(
+            d_model=d_model, nhead=nhead, dim_feedforward=d_hid, dropout=dropout, batch_first=True)
         self.transformer_encoder = TransformerEncoder(encoder_layers, nlayers_e)
-        decoder_layers = TransformerDecoderLayer(d_model, nhead, d_hid, dropout)
+        decoder_layers = TransformerDecoderLayer(
+            d_model=d_model, nhead=nhead, dim_feedforward=d_hid, dropout=dropout, batch_first=True)
         self.transformer_decoder = TransformerDecoder(decoder_layers, nlayers_d)
         self.d_model = d_model
         self.linear = nn.Linear(d_model*ntoken, num_class)
@@ -126,11 +128,10 @@ class TransformerEncoderDecoder(nn.Module):
         src = self.pos_encoder(src)
         
         if src_mask is None:
-            src_mask = nn.Transformer.generate_square_subsequent_mask(len(src)).to(device)
-        if train == True:
+            src_mask = nn.Transformer.generate_square_subsequent_mask(src.size(1)).to(device)
+        if train is True:
             memory = self.transformer_encoder(src, src_mask) # Memory
         output = self.transformer_decoder(tgt, memory) # Target
-        output = output.permute(1, 0, 2)
         output = output.reshape(output.size(0), -1)
         output = self.linear(output)
         return memory, output
