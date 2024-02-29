@@ -12,7 +12,7 @@ def test_encoder(model, dataloader):
     # print(next(model.parameters()).device)
     with torch.no_grad():
         for x, y in tqdm(dataloader):
-            x = x.permute(2, 0, 1).to(device)
+            x = x.permute(0, 2, 1).to(device)
             y = y.to(device)
             y_pred = model(x)
             s_pred.append(y_pred.cpu().detach())
@@ -39,7 +39,7 @@ def test_encoderdecoder(model, src, dataloader):
         for x, y in tqdm(dataloader):
             if x.size(0) != batch_size:
                 continue
-            x = x.permute(2, 0, 1).to(device)
+            x = x.permute(0, 2, 1).to(device)
             y = y.to(device)
             memory, y_pred = model(src, x, True)
             s_pred.append(y_pred.cpu().detach())
