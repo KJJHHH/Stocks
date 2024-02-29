@@ -5,3 +5,5 @@ Implementing various deep learning methodologies in stock market analysis
 - Computer vision deep learning models
 ### Transformer
 - Transformer models
+### Portfolio
+- ML method on building portfolio
