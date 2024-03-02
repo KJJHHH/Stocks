@@ -7,9 +7,6 @@
 4. Select do, dc, dh, dl, dv, and Close (Normalise)
 5. Use window 100, i.e. predict with last 100 dates’ data, as X value
 6. Predict the next dates’ do, dc6. 
-
----
-
 ### In Transformer Encoder Decoder
 1. Src: whole batch x_train
 2. tgt: batched x_train
