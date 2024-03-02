@@ -6,12 +6,17 @@
 3. Normalise with train set. Set another column ‘ Close_origin’ as the Close before normalise
 4. Select do, dc, dh, dl, dv, and Close (Normalise)
 5. Use window 100, i.e. predict with last 100 dates’ data, as X value
-6. Predict the next dates’ do, dc
-7. Src: whole batch x_train
-8. tgt: batched x_train
+6. Predict the next dates’ do, dc6. 
 
-### Models
-# Models
+---
+
+### In Transformer Encoder Decoder
+1. Src: whole batch x_train
+2. tgt: batched x_train
+
+# Models# 
+
+Two models: Decoder-only and Transformer-Encoder-Decoder
 
 ```python
 L: Total length
