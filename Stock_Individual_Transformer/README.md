@@ -42,7 +42,7 @@ Buy if: (predicted next day’s Close - Open) > today’s Close * 0.004
 |             | Buy and Hold | Decoder-Only | Transformer |
 | ----------- | ------------ | ------------ | ----------- |
 | Final Asset |     0.89     |    1.08      |     1.13    |
-- Plot Results
+- Plot Results: Asset
     - Decoder-Only
     ![alt text](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Decoder/Model_Result/Transformer-Decoder-Only_class2_5871_backtest.png)
     - Transformer
