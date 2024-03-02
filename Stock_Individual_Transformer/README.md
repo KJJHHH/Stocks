@@ -38,6 +38,7 @@ B: Batch size
 
 # Experiments
 - Strategy\
+
 Buy if: (predicted next day’s Close - Open) > today’s Close * 0.004
 |             | Buy and Hold | Decoder-Only | Transformer |
 | ----------- | ------------ | ------------ | ----------- |
