@@ -24,10 +24,11 @@ Buy if: (predicted next day’s Close - Open) > today’s Close * 0.004
 | ----------- | ------------ | ------------ | ----------- |
 | Accuracy    |              |    0.441     |     0.445   |
 | Final Asset |     0.89     |    1.08      |     1.13    |
+
+![alt text](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Decoder/Model_Result/Transformer-Decoder-Only_class2_5871_backtest.png)
 ### Plots
 <details>
 <summary>Decoder-Only</summary>
-![image](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Decoder/Model_Result/Transformer-Decoder-Only_class2_5871_backtest.png)
 </details>
 <details>
 <summary>Transformer</summary>
