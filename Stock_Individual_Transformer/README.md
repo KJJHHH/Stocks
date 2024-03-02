@@ -1,28 +1,57 @@
 # Transformer Models to Predict Stock 
-### Data Preprocess
+# Data Preprocess
+
 1. Download data with Open, Close, High, Low, Volume
-2. Transform to the percentile change for each date as do, dc, ...
-3. Normalise with train set
-4. Select do, dc, dh, dl, dvm and Close
-5. Use window 400, i.e. predict with last 400 dates’ data, as X value
-6. Predict the next dates’ (Open - Close)/Close
+2. Transform to the percentile change for each date as do, dc, …
+3. Normalise with train set. Set another column ‘ Close_origin’ as the Close before normalise
+4. Select do, dc, dh, dl, dv, and Close (Normalise)
+5. Use window 100, i.e. predict with last 100 dates’ data, as X value
+6. Predict the next dates’ do, dc
+7. Src: whole batch x_train
+8. tgt: batched x_train
 
 ### Models
-- Transformer Decoder-Only
-- Transoformer EncodDecoder
+# Models
+
+```python
+L: Total length
+P: Patch numbers = L - S + 1
+S: Sequence length for each patch
+D: Input dim
+B: Batch size
+```
+
+### Decoder-Only
+
+- Positional Encoding
+- Transformer Decoder
+- Fully Connected Layer
+
+### Transformer
+
+- Positional Encoding
+- Use Convolution as encoder to map
+    - src from (B, L, D) to (B, P, D)
+    - tgt from (B, S, D) to (B, 1, D)
+    
+    <aside>
+    💡 3 x 3 Convolution * 3 with residual connection last convolution encoding output
+    
+    </aside>
+    
+- Transformer
+    - Src to Transformer Encoder → memory
+    - Memory, tgt to Transformer Decoder → output (B, 1, D)
+- Linear map (B, D) to (B, 2), as do and dc
 
 ### Experiments
 - Strategy\
 Buy if: (predicted next day’s Close - Open) > today’s Close * 0.004
-- Accuracy: The sign accuracy of predicted and true values
-
 |             | Buy and Hold | Decoder-Only | Transformer |
 | ----------- | ------------ | ------------ | ----------- |
-| Accuracy    |              |    0.441     |     0.445   |
 | Final Asset |     0.89     |    1.08      |     1.13    |
 - Plot Results
     - Decoder-Only
     ![alt text](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Decoder/Model_Result/Transformer-Decoder-Only_class2_5871_backtest.png)
     - Transformer
     ![alt text](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/Transformer-Encoder-Decoder_class2_5871_backtest.png)
-
