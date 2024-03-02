@@ -1,4 +1,4 @@
-# Computer Vision Methods to Predict Stock 
+# Transformer Models to Predict Stock 
 ### Data Preprocess
 1. Download data with Open, Close, High, Low, Volume
 2. Transform to the percentile change for each date as do, dc, ...
