@@ -32,7 +32,7 @@ Buy if: (predicted next day’s Close - Open) > today’s Close * 0.004
 </details>
 <details>
 <summary>Transformer</summary>
-![image](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/Transformer-Encoder-Decoder_class2_5871_backtest.png)
+![alt text](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/Transformer-Encoder-Decoder_class2_5871_backtest.png)
 </details>
 <details>
 <summary>DenseNet</summary>
