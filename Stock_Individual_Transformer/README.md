@@ -11,10 +11,8 @@
 1. Src: whole batch x_train
 2. tgt: batched x_train
 
-# Models# 
-
+# Models and Training
 Two models: Decoder-only and Transformer-Encoder-Decoder
-
 ```python
 L: Total length
 P: Patch numbers = L - S + 1
@@ -22,31 +20,23 @@ S: Sequence length for each patch
 D: Input dim
 B: Batch size
 ```
-
 ### Decoder-Only
-
 - Positional Encoding
 - Transformer Decoder
+    - Input (B, S, D) Output (B, S, D)
 - Fully Connected Layer
-
 ### Transformer
-
 - Positional Encoding
 - Use Convolution as encoder to map
-    - src from (B, L, D) to (B, P, D)
-    - tgt from (B, S, D) to (B, 1, D)
-    
-    <aside>
-    💡 3 x 3 Convolution * 3 with residual connection last convolution encoding output
-    
-    </aside>
-    
+    - 💡 3 x 3 Convolution * 3 with residual connection last convolution encoding output   
+    - tgt from (B, S, D) to (B, 1, D)  
+    - src from (T, S, D) to (B, T, D)      
 - Transformer
-    - Src to Transformer Encoder → memory
-    - Memory, tgt to Transformer Decoder → output (B, 1, D)
+    - Transformer Encoder: Src → Memory (B, T, D) 
+    - Transformer Decoder: Memory, Tgt → output (B, 1, D)
 - Linear map (B, D) to (B, 2), as do and dc
 
-### Experiments
+# Experiments
 - Strategy\
 Buy if: (predicted next day’s Close - Open) > today’s Close * 0.004
 |             | Buy and Hold | Decoder-Only | Transformer |
