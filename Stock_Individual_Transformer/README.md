@@ -16,23 +16,22 @@
     - VisionTransformer: ViT_b_16
 
 ### Experiments
-Buy if (predicted next day’s Close - Open > today’s Close * 0.004)
-|  | ResNet | GoogleNet | DenseNet | VTCNN | ConCNN | ConRes |
-| --- | --- | --- | --- | --- | --- | --- |
-| Accuracy |  |  |  |  |  |  |
-| Final Asset |  |  |  |  |  |  |
-
-|             | ViT_b_16 |     |     |         |        |       |
-| ----------- | -------- | --- | --- | --- | --- | --- |
-| Accuracy    |          |      |     |     |  |  |
-| Final Asset |          |  |  |  |  |  |
-
+- Strategy
+Buy if: (predicted next day’s Close - Open) > today’s Close * 0.004
+- Accuracy
+    - The sign accuracy of predicted and true values
+|             | Buy and Hold | Decoder-Only | Transformer |
+| ----------- | ------------ | ------------ | ----------- |
+| Accuracy    |              |    0.441     |     0.445   |
+| Final Asset |     0.89     |    1.08      |     1.13    |
 ### Plots
 <details>
-<summary>ResNet</summary>
+<summary>Decoder-Only</summary>
+![image](Model-Decoder/Model_Result/Transformer-Decoder-Only_class2_5871_backtest.png)
 </details>
 <details>
-<summary>GoogleNet</summary>
+<summary>Transformer</summary>
+![image](Model-Transformer/Model_Result/Transformer-Encoder-Decoder_class2_5871_backtest.png)
 </details>
 <details>
 <summary>DenseNet</summary>
