@@ -27,11 +27,11 @@ Buy if: (predicted next day’s Close - Open) > today’s Close * 0.004
 ### Plots
 <details>
 <summary>Decoder-Only</summary>
-![image](Model-Decoder/Model_Result/Transformer-Decoder-Only_class2_5871_backtest.png)
+![image](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Decoder/Model_Result/Transformer-Decoder-Only_class2_5871_backtest.png)
 </details>
 <details>
 <summary>Transformer</summary>
-![image](Model-Transformer/Model_Result/Transformer-Encoder-Decoder_class2_5871_backtest.png)
+![image](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/Transformer-Encoder-Decoder_class2_5871_backtest.png)
 </details>
 <details>
 <summary>DenseNet</summary>
