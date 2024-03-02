@@ -103,22 +103,53 @@ class TransformerEncoderDecoder(nn.Module):
         
         # Check if train is False and memory is None
         assert train or memory is not None, "Test mode but no memory"
-        src = tgt
+        # Positional encode
+        """
+        src: (totallen, seqlen, d_model)
+        tgt: (batch, seqlen, d_model)
+        """        
+        src = self.pos_encoder(src)
+        tgt = self.pos_encoder(tgt)        
         
+        # Downsampling
+        """
+        tgt: (batch, seqlen, d_model) -> (batch, 1, d_model)
+        """
+        tgt = self.transform_patch_len_to_1(tgt)
+        """
+        NOTE: Change src to: (totallen, seqlen, d_model) -> (batch_size, totallen, d_model)
+        1. Downsample: (totallen, seqlen, d_model) -> (totallen, 1, d_model) -> (totallen, d_model) 
+        2. Repeat to batch size: (totallen, d_model) -> (batch_size, totallen, d_model)
+        3. positional encode again
+        """
+        src = self.transform_patch_len_to_1(src).squeeze(1) # 1.
+        src = src.unsqueeze(0).repeat(32, 1, 1) # 2.
+        src = self.pos_encoder(src) # 
+        
+        # Lengths
         N = src.size(0)
         L_src = src.size(1)
         L_tgt = tgt.size(1)
         D = src.size(2)
         
-        src = self.pos_encoder(src)
-        tgt = self.pos_encoder(tgt)        
-        
         # Encoder
-        src_mask = nn.Transformer.generate_square_subsequent_mask(L_src).to(device)
         if train is True:
-            memory = self.transformer_encoder(src, src_mask) # Memory
-            
-        # Tgt downsampling
+            src_mask = nn.Transformer.generate_square_subsequent_mask(L_src).to(device)
+            memory = self.transformer_encoder(src, src_mask) # Memory        
+        
+        # Decoder
+        # tgt_padding_mask = self.padding_mask(tgt).to(device)
+        output = self.transformer_decoder(
+            tgt=tgt, memory=memory) # , tgt_key_padding_mask = tgt_padding_mask
+        output = tgt + output
+        output = output.reshape(output.size(0), -1)
+        output = self.linear(output)
+        
+        tgt = self.linear(tgt.reshape(output.size(0), -1))
+        output = tgt + output
+        return memory, output
+        
+    def transform_patch_len_to_1(self, tgt):
         tgt = tgt.permute(0, 2, 1)
         tgt1 = tgt.view(tgt.size(0), -1)
         tgt = self.conv1(tgt)        
@@ -150,17 +181,7 @@ class TransformerEncoderDecoder(nn.Module):
         
         tgt = tgt.unsqueeze(1)
         
-        # Decoder
-        # tgt_padding_mask = self.padding_mask(tgt).to(device)
-        output = self.transformer_decoder(
-            tgt=tgt, memory=memory) # , tgt_key_padding_mask = tgt_padding_mask
-        # output = tgt + output
-        output = output.reshape(output.size(0), -1)
-        output = self.linear(output)
-        
-        tgt = self.linear(tgt.reshape(output.size(0), -1))
-        output = tgt + output
-        return memory, output
+        return tgt
         
     def padding_mask(self, x):
         N = x.size(0) # batch size
