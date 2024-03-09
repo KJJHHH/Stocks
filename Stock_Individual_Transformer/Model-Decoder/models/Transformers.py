@@ -41,7 +41,7 @@ class PositionalEncoding(nn.Module):
 class TransformerDecoderOnly(nn.Module):
 
     def __init__(self, ntoken: int = 100, d_model: int = 6, nhead: int = 2, d_hid: int = 128, num_class: int = 1,
-                 nlayers: int = 16, dropout: float = 0.5):
+                 nlayers: int = 64, dropout: float = 0.5):
         super().__init__()
         self.model_type = 'Transformer-Decoder-Only'
         self.embedding = nn.Embedding(ntoken, d_model)
