@@ -12,7 +12,9 @@
 2. tgt: batched x_train
 
 # Models and Training
-Two models: Decoder-only and Transformer-Encoder-Decoder
+Two models
+- [] Decoder-only (Progressing) 
+- [x] Transformer-Encoder-Decoder
 ```python
 L: Total length
 P: Patch numbers = L - S + 1

@@ -59,11 +59,10 @@ def window_x_y(df, num_class, window_size=100):
     y = np.array(y1_list)
     return x, y, date
 
-def use_src(df):
-    src = df[['do', 'dh', 'dl', 'dc', 'dv', 'Close']][:2000].T.values
-    src = np.array(src)
-    return src
-    
+def get_src(df, num_class):    
+    x, y, date = window_x_y(df, num_class, 1)
+    src = x[:2000]
+    return torch.tensor(src).to(dtype=torch.float32)   
 
 def process_x(x):
     # gaf

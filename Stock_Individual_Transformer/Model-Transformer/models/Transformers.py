@@ -1,3 +1,4 @@
+from curses import window
 import torch
 import torchvision
 import torch.nn as nn
@@ -42,10 +43,11 @@ class TransformerEncoderDecoder(nn.Module):
     def __init__(
         self, 
         d_model: int = 6,  nhead: int = 6,  dropout: float = 0.5,
-        d_hid: int = int(256/2), num_class: int = 1, nlayers_e: int = int(64*2), 
+        d_hid: int = int(256*2), num_class: int = 1, nlayers_e: int = int(64*8), 
         nlayers_d: int = int(16*1), windows: int = 10, ntoken: int = 100):        
         super().__init__()
         
+        self.window = windows
         self.model_type = f'TransEnDecoder-Window{windows}EL{nlayers_e}DL{nlayers_d}Hid{d_hid}'
         self.embedding = nn.Embedding(ntoken, d_model)
         self.pos_encoder = PositionalEncoding(d_model, dropout)
@@ -80,8 +82,8 @@ class TransformerEncoderDecoder(nn.Module):
         
         # Fin
         self.d_model = d_model
-        self.linear1 = nn.Linear(d_model*windows, num_class)
-        self.linear2 = nn.Linear(d_model*windows, num_class)
+        self.linear1 = nn.Linear(d_model, num_class)
+        self.linear2 = nn.Linear(d_model, num_class)
 
         self.init_weights()
 
@@ -109,7 +111,10 @@ class TransformerEncoderDecoder(nn.Module):
         # src = self.embedding(src) * math.sqrt(self.d_model)
         
         # Check if train is False and memory is None
+        # Check window size
         assert train or memory is not None, "Test mode but no memory"
+        assert self.window != tgt.size(0), 'Window size wrong!!'
+        
         # Positional encode
         """
         Input of pos_encoding:
@@ -145,16 +150,16 @@ class TransformerEncoderDecoder(nn.Module):
         """
         output = self.transformer_decoder(tgt=tgt, memory=memory) 
         output = tgt + output
-        output = output.reshape(output.size(0), -1)
-        output = self.linear1(output)
         
-        tgt = self.linear2(tgt.reshape(output.size(0), -1))
+        output = self.linear1(output[:, -1, :].reshape(output.size(0), -1))
+        tgt = self.linear2(tgt[:, -1, :].reshape(output.size(0), -1))
         output = tgt + output
+        
         return memory, output
         
     def transform_patch_len_to_1(self, tgt):
         """
-        Use in version 1, no 2
+        Use in old version
         """
         tgt = tgt.permute(0, 2, 1)
         tgt1 = tgt.view(tgt.size(0), -1)

@@ -36,6 +36,7 @@ def test_encoderdecoder(model, src, dataloader):
         batch_size = x.shape[0]
         break
     with torch.no_grad():
+        src = src.permute(1, 0, 2)
         for x, y in tqdm(dataloader):
             if x.size(0) != batch_size:
                 continue
