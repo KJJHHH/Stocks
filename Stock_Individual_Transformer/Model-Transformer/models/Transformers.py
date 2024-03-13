@@ -43,12 +43,12 @@ class TransformerEncoderDecoder(nn.Module):
     def __init__(
         self, 
         d_model: int = 6,  nhead: int = 6,  dropout: float = 0.5,
-        d_hid: int = int(256*2), num_class: int = 1, nlayers_e: int = int(64*8), 
-        nlayers_d: int = int(16*1), windows: int = 10, ntoken: int = 100):        
+        d_hid: int = int(256/2), num_class: int = 1, nlayers_e: int = int(64/4), 
+        nlayers_d: int = int(16/2), windows: int = 10, ntoken: int = 100):        
         super().__init__()
         
         self.window = windows
-        self.model_type = f'TransEnDecoder-Window{windows}EL{nlayers_e}DL{nlayers_d}Hid{d_hid}'
+        self.model_type = f'TransEnDecoder-Window{windows}-EL{nlayers_e}-DL{nlayers_d}-Hid{d_hid}'
         self.embedding = nn.Embedding(ntoken, d_model)
         self.pos_encoder = PositionalEncoding(d_model, dropout)
         
@@ -104,6 +104,7 @@ class TransformerEncoderDecoder(nn.Module):
             """
             src_mask = nn.Transformer.generate_square_subsequent_mask(L_src).to(device)
             memory = self.transformer_encoder(src, src_mask) # Memory  
+            memory = self.transformer_encoder(memory, src_mask) # Memory  
             memory = memory.repeat(tgt.size(0), 1, 1)
         
         # Decoder
@@ -120,7 +121,7 @@ class TransformerEncoderDecoder(nn.Module):
         output = tgt + output
         
         output = self.linear1(output[:, -1, :].reshape(output.size(0), -1))
-        tgt = self.linear2(tgt[:, -1, :].reshape(output.size(0), -1))
+        tgt = self.linear1(tgt[:, -1, :].reshape(output.size(0), -1))
         output = tgt + output
         
         return memory, output

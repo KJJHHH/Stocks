@@ -13,7 +13,7 @@
 
 # Models and Training
 Two models
-- [] Decoder-only (Progressing) 
+- [ ] Decoder-only 
 - [x] Transformer-Encoder-Decoder
 ```python
 L: Total length

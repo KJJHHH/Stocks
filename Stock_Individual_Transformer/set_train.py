@@ -2,7 +2,7 @@ def set_train():
     stock_symbol = '2454.TW'
     end_date = '2024-12-31'
 
-    num_class = 2
+    num_class = 1
     batch_size = 128
     init = True
     fp16_training = True
