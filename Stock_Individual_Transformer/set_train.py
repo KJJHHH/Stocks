@@ -3,7 +3,7 @@ def set_train():
     end_date = '2024-12-31'
 
     num_class = 2
-    batch_size = 64
+    batch_size = 128
     init = True
     fp16_training = True
     num_epochs = 50

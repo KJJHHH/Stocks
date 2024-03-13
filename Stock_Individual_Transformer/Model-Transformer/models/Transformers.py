@@ -58,27 +58,7 @@ class TransformerEncoderDecoder(nn.Module):
         self.transformer_encoder = TransformerEncoder(encoder_layers, nlayers_e)
         decoder_layers = TransformerDecoderLayer(
             d_model=d_model, nhead=nhead, dim_feedforward=d_hid, dropout=dropout, batch_first=True)
-        self.transformer_decoder = TransformerDecoder(decoder_layers, nlayers_d)
-        
-        # Convolution 
-        """
-        # Use in version 1, no 2
-        self.conv1 = nn.Conv1d(6, 16, kernel_size=3, stride=1, padding=1)
-        self.conv2 = nn.Conv1d(16, 32, kernel_size=3, stride=1, padding=1)
-        self.conv3 = nn.Conv1d(32, 64, kernel_size=3, stride=1, padding=1)
-        self.maxpool = nn.MaxPool1d(kernel_size=5, stride=2)
-        self.maxpool2 = nn.MaxPool1d(kernel_size=3, stride=1)
-        self.bn1 = nn.BatchNorm1d(16)
-        self.bn2 = nn.BatchNorm1d(32)
-        self.bn3 = nn.BatchNorm1d(64)
-        self.relu = nn.ReLU()        
-        self.conv_linear1 = nn.Linear(6*100, d_model)
-        self.conv_linear2 = nn.Linear(16*48, d_model)
-        self.conv_linear3 = nn.Linear(32*22, d_model)
-        self.conv_linear4 = nn.Linear(64*9, d_model)
-        self.conv_linear5 = nn.Linear(64*3, d_model)
-        self.conv_linear = nn.Linear(64, d_model)
-        """
+        self.transformer_decoder = TransformerDecoder(decoder_layers, nlayers_d)        
         
         # Fin
         self.d_model = d_model
@@ -97,23 +77,9 @@ class TransformerEncoderDecoder(nn.Module):
 
     def forward(self, src: Tensor, tgt: Tensor, train: bool, 
                 memory: Tensor = None, src_mask: Tensor = None) -> Tensor:
-        """
-        Arguments:
-            src: Tensor, shape ``[seq_len, batch_size]``
-            src_mask: Tensor, shape ``[seq_len, seq_len]``
-        Returns:
-            output Tensor of shape ``[seq_len, batch_size, ntoken]``
-        if src_mask is None:
-            Generate a square causal mask for the sequence. The masked positions are filled with float('-inf').
-            Unmasked positions are filled with float(0.0).
-        """
-        # See the input as encoding 
-        # src = self.embedding(src) * math.sqrt(self.d_model)
         
-        # Check if train is False and memory is None
-        # Check window size
-        assert train or memory is not None, "Test mode but no memory"
-        assert self.window != tgt.size(0), 'Window size wrong!!'
+        assert train or memory is not None, "Test mode but no memory" # Check if train is False and memory is None
+        assert self.window != tgt.size(0), 'Window size wrong!!' # Check window size
         
         # Positional encode
         """
@@ -149,6 +115,8 @@ class TransformerEncoderDecoder(nn.Module):
             tgt=tgt, memory=memory , tgt_key_padding_mask = tgt_padding_mask) # 
         """
         output = self.transformer_decoder(tgt=tgt, memory=memory) 
+        output = tgt + output
+        output = self.transformer_decoder(tgt=output, memory=memory) 
         output = tgt + output
         
         output = self.linear1(output[:, -1, :].reshape(output.size(0), -1))
