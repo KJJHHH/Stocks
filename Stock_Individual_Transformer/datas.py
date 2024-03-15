@@ -38,7 +38,7 @@ def data(
 
     df['Close_origin'] = df['Close']
     scaler = StandardScaler()
-    scaler.fit(df[['do', 'dh', 'dl', 'dc', 'dv', 'Close']][:2000])
+    scaler.fit(df[['do', 'dh', 'dl', 'dc', 'dv', 'Close']][:2500])
     df[['do', 'dh', 'dl', 'dc', 'dv', 'Close']] = scaler.fit_transform(df[['do', 'dh', 'dl', 'dc', 'dv', 'Close']])
 
 
@@ -47,7 +47,7 @@ def data(
     x_train, x_valid, y_train, y_valid = train_valid(X, y)
     test_date = df.index[-len(y_test):]
     src = get_src(df, num_class)
-    print(f'x_train_len: {len(x_train)}')
+    print(f'x_train_len: {len(x_train)}, valid_len: {len(x_valid)}, test_len: {len(x_test)}')
 
     trainloader, validloader, testloader = (
         loader(

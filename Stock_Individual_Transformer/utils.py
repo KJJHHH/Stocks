@@ -82,8 +82,9 @@ def train_test(X, y):
 
     import random
     # valid
-    percentage = 90
+    percentage = 95
     num_numbers = int((percentage / 100) * len(X))
+    num_numbers = len(X) - 160
 
     # Generate a list of randomly selected numbers
     """valid_numbers = random.sample(range(0, len(X)), num_numbers)
@@ -101,8 +102,9 @@ def train_valid(X, y):
 
     import random
     # valid
-    percentage = 80
+    percentage = 95
     num_numbers = int((percentage / 100) * len(X))
+    num_numbers = len(X) - 160
 
     # Generate a list of randomly selected numbers
     """valid_numbers = random.sample(range(0, len(X)), num_numbers)
