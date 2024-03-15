@@ -1,5 +1,5 @@
 def set_train():    
-    stock_symbol = '2884.TW'
+    stock_symbol = '5871.TW'
     end_date = '2024-12-31'
 
     num_class = 2
