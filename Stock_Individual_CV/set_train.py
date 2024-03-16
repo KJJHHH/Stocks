@@ -1,5 +1,5 @@
 def set_train():    
-    stock_symbol = '2454.TW'
+    stock_symbol = '5871.TW'
     end_date = '2024-12-31'
 
     num_class = 2
@@ -7,5 +7,5 @@ def set_train():
     init = True
     fp16_training = True
     num_epochs = 500
-    lr = 0.0001
+    lr = 0.00001
     return stock_symbol, end_date, num_class, batch_size, init, fp16_training, num_epochs, lr

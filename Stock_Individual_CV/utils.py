@@ -9,10 +9,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 def gaf(X):
     X = X.reshape(-1)
-    # Pairwise differences
-    X_diff = X.unsqueeze(0) - X.unsqueeze(1) 
-    # Gramian Angular Field
-    # GAF = torch.cos(X_diff)
+    X_diff = X.unsqueeze(0) - X.unsqueeze(1) # Pairwise differences
+    # GAF = torch.cos(X_diff)# Gramian Angular Field
     GAF = X_diff
 
     return GAF
@@ -26,26 +24,17 @@ def normalize(x, mean, std):
     return (x - mean) / std
 
 def fetch_stock_price(stock_symbol, start_date, end_date):
-    # 使用 yf.Ticker() 建立 Ticker 對象
     stock = yf.Ticker(stock_symbol)
-
-    # 使用 history() 方法取得歷史價格資訊
     stock_data = stock.history(start=start_date, end=end_date)
 
     return stock_data
 
 
-# preprocess func
-def window_x_y(df, num_class, window_size=100):
-    '''
-    df: splitted data: train and valid / test
-    '''
+def window_x_y(df, num_class, window_size=100): # df: before split
     x1_list, y1_list, date = [], [], []
-
-    # Iterate over the DataFrame to create the training and testing sets
-    for i in tqdm(range(len(df)-window_size+1)):
+    for i in tqdm(range(len(df)-window_size+1)): # Create data with window
         window = df.iloc[i:i+window_size]  # Extract the window of data
-        x1_values = window[['do', 'dh', 'dl', 'dc', 'dv']].T.values  # Adjust column names as needed
+        x1_values = window[['do', 'dh', 'dl', 'dc', 'dv', 'Close']].T.values  # Adjust column names as needed
         if num_class == 1:
             y1_values = window[['doc_1']].iloc[-1].T.values
         if num_class == 2:
@@ -53,21 +42,16 @@ def window_x_y(df, num_class, window_size=100):
         x1_list.append(x1_values)
         y1_list.append(y1_values)
         date.append(window.index[-1])
-
-    # Convert the lists to NumPy arrays
     x = np.array(x1_list)
     y = np.array(y1_list)
     return x, y, date
 
-def use_src(df):
-    src = df[['do', 'dh', 'dl', 'dc', 'dv', 'Close']][:2000].T.values
-    src = np.array(src)
-    return src
-    
+def get_src(df, num_class):    
+    x, y, date = window_x_y(df, num_class, 1)
+    src = x[:2000]
+    return torch.tensor(src).to(dtype=torch.float32)   
 
 def process_x(x):
-    # gaf
-    import gc
     X = []
     x = torch.tensor(x, dtype=torch.float32).to(device)
     for i in tqdm(range(len(x))):
@@ -80,46 +64,30 @@ def process_x(x):
     return X
 
 def train_test(X, y):
-
-    import random
-    # valid
-    percentage = 90
+    percentage = 95
     num_numbers = int((percentage / 100) * len(X))
+    num_numbers = len(X) - 160
 
-    # Generate a list of randomly selected numbers
-    """valid_numbers = random.sample(range(0, len(X)), num_numbers)
-    training_numbers = [num for num in range(0, len(X)) if num not in valid_numbers]"""
-
-    # Train, valid
     x_train = X[:num_numbers]
     x_test = X[num_numbers:]
-
     y_train = y[:num_numbers]
     y_test = y[num_numbers:]
     return x_train, x_test, y_train, y_test
 
 def train_valid(X, y):
-
-    import random
-    # valid
-    percentage = 80
+    percentage = 95
     num_numbers = int((percentage / 100) * len(X))
-
-    # Generate a list of randomly selected numbers
-    """valid_numbers = random.sample(range(0, len(X)), num_numbers)
-    training_numbers = [num for num in range(0, len(X)) if num not in valid_numbers]"""
-
-    # Train, valid
+    num_numbers = len(X) - 160
+    
     x_train = X[:num_numbers]
     x_valid = X[num_numbers:]
-
     y_train = y[:num_numbers]
     y_valid = y[num_numbers:]
     return x_train, x_valid, y_train, y_valid
 
 def loader(x, y, batch_size = 16):
     dataset = TensorDataset(x, y)
-    dataloader = DataLoader(dataset, batch_size, shuffle=False)
+    dataloader = DataLoader(dataset, batch_size, shuffle=False, drop_last=True)
     return dataloader
 
 """
