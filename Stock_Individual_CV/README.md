@@ -1,6 +1,8 @@
 # Computer Vision Methods to Predict Stock 
 ## Experiments
-
+Asset using transformer model comparing to buy-and-hold strategy
+- Conformer: [Asset]() | 中租，5871
+- Resnet: [Asset]() | 中租，5871
 ### Data Preprocess
 1. Download data with Open, Close, High, Low, Volume
 2. Transform to the percentile change for each date
