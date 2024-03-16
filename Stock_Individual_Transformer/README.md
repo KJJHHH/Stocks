@@ -1,8 +1,8 @@
 # Transformer Models to Predict Stock 
-# Goals
+## Goals
 Predict the daily percentile change for open and close price
 
-# Experiments
+## Experiments
 ### Final Asset and Loss
 - 5871: 
 [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_5871_backtest.png)
@@ -14,7 +14,7 @@ Predict the daily percentile change for open and close price
 [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_2884_backtest.png)
 [Loss](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_5871_loss.png)
 
-# Models 
+## Models 
 - [x] Transformer-Encoder-Decoder
 - [ ] Decoder-only
 ```python
@@ -36,7 +36,7 @@ Input of decoder: tgt shape = (B, W, D), memory shape = (B, T, D)
 '''
 ```
 
-# Data Preprocess
+## Data Preprocess
 
 1. Download data with Open, Close, High, Low, Volume
 2. Transform to the percentile change for each date as do, dc, …
