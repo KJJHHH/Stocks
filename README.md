@@ -1,6 +1,6 @@
 # Stocks
 Implementing various deep learning models in stock market analysis
-- [ ] Stock_Individual_CV
+- [X] Stock_Individual_CV
 - [x] Stock_Individual_Transformer
 - [x] Stock_Portfolio
 ---
