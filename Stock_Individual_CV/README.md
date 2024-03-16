@@ -12,7 +12,7 @@ Asset using transformer model comparing to buy-and-hold strategy
 - Resnet: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_CV/Models/Model_Result/ResNet_class2_5871_backtest.png) 
 - Conformer Resnet: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_CV/Models/Model_Result/Conformer-Resnet_class2_5871_backtest.png) 
 - VisionTransformer: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_CV/Models/Model_Result/Vision-Transformer_class2_5871_backtest.png) 
-### Data Preprocess
+## Data Preprocess
 1. Download data with Open, Close, High, Low, Volume
 2. Transform to the percentile change for each date
 3. Use window 100, i.e. predict with last 100 dates’ data, as X value
