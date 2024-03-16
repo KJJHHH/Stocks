@@ -9,7 +9,7 @@
 6. Predict the next dates’ do, dc6. 
 
 # Models and Training
-Two models 
+## Two models 
 - [x] Transformer-Encoder-Decoder
 - [ ] Decoder-only
 ```python
@@ -19,12 +19,11 @@ S: Sequence length for each patch
 D: Input dim
 B: Batch size
 ```
-### Transformer
-- Positional Encoding
-- Use Convolution as encoder to map
-    - 💡 3 x 3 Convolution * 3 with residual connection last convolution encoding output   
-    - tgt from (B, S, D) to (B, 1, D)  
-    - src from (T, S, D) to (B, T, D)      
+### Transformer Model Structure
+```python
+# Input: src shape (B, )
+```
+- Positional Encoding   
 - Transformer
     - Transformer Encoder: Src → Memory (B, T, D) 
     - Transformer Decoder: Memory, Tgt → output (B, 1, D)
