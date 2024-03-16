@@ -2,7 +2,7 @@
 <!---🦁🙉😹🧑💗🦁🏋🐱🖼️📝--->
 
 
-Build stock portfolio by utilising different machine learning algorithm including linear regressions, SVM, tree methods, and deep learning and train the algorithms with rolling prediction for each month. The portfolios are based on automotive, semi conductor, and TFT-LCD industry. 
+Build stock portfolio by utilising multiple machine learning algorithm with rolling prediction for each month.
 
 ## Data and Preprocessing
 - The data for training algorithms are downloaded from TEJ database, including **fundamental**, **chip**, and **Betas data**. Besides, we compute the **technical analysis** values include RSI, SMA, EMA, MACD, bband, KD, beta, willr, and bias with talib packages
@@ -19,6 +19,11 @@ Build stock portfolio by utilising different machine learning algorithm includin
 - Neural Network
 
 ## Result
+ The portfolios are based on automotive, semi conductor, and TFT-LCD industry. 
+- [x] automotive
+- [ ] semi conductor
+- [ ] TFT-LCD industry
+ 
 ### Automotive Industry
 - Annualised returns mean, volitility, and Sharpe ratio 
 
