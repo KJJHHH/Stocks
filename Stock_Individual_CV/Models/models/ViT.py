@@ -1,6 +1,6 @@
 import torch
 import torchvision
-import torch.nn as nn
+import torch.nn as nn 
 import sys 
 sys.path.append('../')
 try:
@@ -10,15 +10,15 @@ except:
 
 # Vision Transformer: https://github.com/pytorch/vision/blob/main/torchvision/models/vision_transformer.py
 # try pretrain, same link above
-class VT_CNN(nn.Module):
+class ViT(nn.Module):
     def __init__(self, num_class=2):
-        super(VT_CNN, self).__init__()
+        super(ViT, self).__init__()
         
         self.model_type = 'Vision-Transformer'
 
         # =======
         # Unet
-        self.conv_init = nn.Conv2d(5, 3, kernel_size=3, stride=1, padding=1, bias=False)
+        self.conv_init = nn.Conv2d(6, 3, kernel_size=3, stride=1, padding=1, bias=False)
         self.VisionTransformer = torchvision.models.VisionTransformer(
             image_size = 100,
             patch_size = 10,

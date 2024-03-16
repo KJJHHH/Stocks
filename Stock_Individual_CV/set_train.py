@@ -7,5 +7,5 @@ def set_train():
     init = True
     fp16_training = True
     num_epochs = 50
-    lr = 0.00001
+    lr = 0.01
     return stock_symbol, end_date, num_class, batch_size, init, fp16_training, num_epochs, lr

@@ -1,8 +1,8 @@
+import sys
+sys.path.append('./models/')
 import torch
-import math
-from torch import nn, Tensor
+from torch import nn
 from torchaudio.models import Conformer
-from einops.layers.torch import Rearrange, Reduce
 from Encoding import *
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -57,7 +57,7 @@ class Conformer_Resnet(nn.Module):
         # =======
         # Unet
         self.in_channels = 64
-        self.conv1 = nn.Conv2d(in_channels=5, out_channels=64, kernel_size=7, stride=2, padding=3, bias=False)
+        self.conv1 = nn.Conv2d(in_channels=6, out_channels=64, kernel_size=7, stride=2, padding=3, bias=False)
         self.bn1 = nn.BatchNorm2d(64)
         self.relu = nn.ReLU(inplace=True)
         self.maxpooling = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
@@ -73,18 +73,18 @@ class Conformer_Resnet(nn.Module):
         
         self.fc1 = nn.Linear(2048*2*2, 128)
         self.fc2 = nn.Linear(128, num_class)
-        self.ln1 = nn.LayerNorm((5, 100, 100))
+        self.ln1 = nn.LayerNorm((6, 100, 100))
         
         
         # =======
         # Conformer
         self.positional_encode = PositionalEncoding(100)
-        self.patch_embedding = PatchEmbedding(in_channels=5, patch_size=10, emb_size=500)
+        self.patch_embedding = PatchEmbedding(in_channels=6, patch_size=10, emb_size=600)
         self.conformer = Conformer(
-            input_dim=500,
+            input_dim=600,
             num_heads=5,
             ffn_dim=128,
-            num_layers=6,
+            num_layers=1,
             depthwise_conv_kernel_size=31)
 
 
@@ -108,12 +108,7 @@ class Conformer_Resnet(nn.Module):
 
         return nn.Sequential(*layers)
     
-    def forward(self, x):
-        """
-        Input scale: (0, 255)
-        Output scale: (0, 255)
-        """
-        
+    def forward(self, x):        
         x_i = x.clone()
         x_s = x.size()
         # =======
