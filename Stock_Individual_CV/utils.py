@@ -87,7 +87,7 @@ def train_valid(X, y):
 
 def loader(x, y, batch_size = 16):
     dataset = TensorDataset(x, y)
-    dataloader = DataLoader(dataset, batch_size, shuffle=False, drop_last=True)
+    dataloader = DataLoader(dataset, batch_size, shuffle=False, drop_last=False)
     return dataloader
 
 """
