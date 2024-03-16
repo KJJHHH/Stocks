@@ -9,7 +9,7 @@ Build stock portfolio by utilising different machine learning algorithm includin
 - The date to update monthly portfolio for each month: The last revenue announce date for all companies. If any announcement date is later than 12th, delete the company for the month
 - For each **rolling prediction**, use five-year training data to predict the adjacent month
 
-### Models
+## Models
 - Multiple linear regression
 - Elastic Net
 - Decision tree
