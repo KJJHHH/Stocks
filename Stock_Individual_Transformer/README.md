@@ -13,7 +13,7 @@ Two models
 - [x] Transformer-Encoder-Decoder
 - [ ] Decoder-only
 ```python
-L: Total length
+L: Total length 
 P: Patch numbers = L - S + 1
 S: Sequence length for each patch
 D: Input dim
