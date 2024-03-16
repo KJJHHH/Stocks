@@ -30,10 +30,8 @@ B: Batch size
 - Transformer: encoder and decoder
 - Linear transformation 
 ```python
-'''
 Input of encoder: src shape = (B, T, D)
 Input of decoder: tgt shape = (B, W, D), memory shape = (B, T, D)
-'''
 ```
 
 ## Data Preprocess
