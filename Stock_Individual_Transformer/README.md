@@ -3,18 +3,15 @@
 
 1. Download data with Open, Close, High, Low, Volume
 2. Transform to the percentile change for each date as do, dc, …
-3. Normalise with train set. Set another column ‘ Close_origin’ as the Close before normalise
+3. Normalise with train set.
 4. Select do, dc, dh, dl, dv, and Close (Normalise)
 5. Use window 100, i.e. predict with last 100 dates’ data, as X value
 6. Predict the next dates’ do, dc6. 
-### In Transformer Encoder Decoder
-1. Src: whole batch x_train
-2. tgt: batched x_train
 
 # Models and Training
-Two models
-- [ ] Decoder-only 
+Two models 
 - [x] Transformer-Encoder-Decoder
+- [ ] Decoder-only
 ```python
 L: Total length
 P: Patch numbers = L - S + 1
@@ -22,11 +19,6 @@ S: Sequence length for each patch
 D: Input dim
 B: Batch size
 ```
-### Decoder-Only
-- Positional Encoding
-- Transformer Decoder
-    - Input (B, S, D) Output (B, S, D)
-- Fully Connected Layer
 ### Transformer
 - Positional Encoding
 - Use Convolution as encoder to map
@@ -36,25 +28,16 @@ B: Batch size
 - Transformer
     - Transformer Encoder: Src → Memory (B, T, D) 
     - Transformer Decoder: Memory, Tgt → output (B, 1, D)
-- Linear map (B, D) to (B, 2), as do and dc
+- Linear transformation (B, D) to (B, 2), as do and dc
 
 # Experiments
-- Strategy
-
-    Buy if: (predicted next day’s Close - Open) > today’s Close * 0.004
-    |             | Buy and Hold | Decoder-Only | Transformer |
-    | ----------- | ------------ | ------------ | ----------- |
-    | Final Asset |     0.89     |    1.08      |     1.13    |
-    
-- Results
-    - Decoder-Only
-    - Transformer Final Asset
-        - 2454: 
-        [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_2454_backtest.png)
-        [Loss](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_2454_loss.png)
-        - 5871: 
-        [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_5871_backtest.png)
-        [Loss](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_2884_loss.png)
-        - 2884: 
-        [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_2884_backtest.png)
-        [Loss](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_5871_loss.png)
+- Transformer Final Asset and Loss
+    - 2454: 
+    [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_2454_backtest.png)
+    [Loss](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_2454_loss.png)
+    - 5871: 
+    [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_5871_backtest.png)
+    [Loss](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_2884_loss.png)
+    - 2884: 
+    [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_2884_backtest.png)
+    [Loss](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_5871_loss.png)
