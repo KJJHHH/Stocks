@@ -7,11 +7,11 @@
 - [ ] Pretrained VisionTransformer
 ## Experiments
 Asset using transformer model comparing to buy-and-hold strategy
-- 中租，5871
-    - Conformer: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_CV/Models/Model_Result/Conformer-CNN_class2_5871_backtest.png) 
-    - Resnet: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_CV/Models/Model_Result/ResNet_class2_5871_backtest.png) 
-    - Conformer Resnet: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_CV/Models/Model_Result/Conformer-Resnet_class2_5871_backtest.png) 
-    - VisionTransformer: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_CV/Models/Model_Result/Vision-Transformer_class2_5871_backtest.png) 
+### 中租，5871
+- Conformer: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_CV/Models/Model_Result/Conformer-CNN_class2_5871_backtest.png) 
+- Resnet: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_CV/Models/Model_Result/ResNet_class2_5871_backtest.png) 
+- Conformer Resnet: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_CV/Models/Model_Result/Conformer-Resnet_class2_5871_backtest.png) 
+- VisionTransformer: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_CV/Models/Model_Result/Vision-Transformer_class2_5871_backtest.png) 
 ### Data Preprocess
 1. Download data with Open, Close, High, Low, Volume
 2. Transform to the percentile change for each date
