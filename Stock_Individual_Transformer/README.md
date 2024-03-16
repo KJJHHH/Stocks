@@ -3,8 +3,8 @@
 Predict the daily percentile change for open and close price
 
 ## Experiments
-### Final Asset with Transformer
-Final asset using transformer model comparing to buy-and-hold strategy
+### Performance with Transformer
+Asset using transformer model comparing to buy-and-hold strategy
 - [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_5871_backtest.png) | 中租，5871
 - [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_2454_backtest.png) | 聯發科技，2454
 - [Asset](https://github.com/KJJHHH/Stocks/blob/main/Stock_Individual_Transformer/Model-Transformer/Model_Result/TransEnDecoder-Window10-EL1-DL1-Hid128-NHead1_class2_2884_backtest.png) | 玉山金融控股公司，2884
