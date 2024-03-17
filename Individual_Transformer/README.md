@@ -32,8 +32,8 @@ Input of decoder: tgt shape = (B, W, D), memory shape = (B, T, D)
 ## Data Preprocess
 
 1. Download data with Open, Close, High, Low, Volume
-2. Transform to the percentile change for each date as do, dc, …
-3. Normalise with train set.
-4. Select do, dc, dh, dl, dv, and Close (Normalise)
-5. Use window 100, i.e. predict with last 100 dates’ data, as X value
-6. Predict the next dates’ do, dc6. 
+2. Transform the data to percentile change
+3. Normalise
+4. Variables: normalised percentile change of Open, Close, High, Low, and Volume
+5. Predict with last 10 dates data
+6. Predict the daily change of open and close
