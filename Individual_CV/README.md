@@ -6,7 +6,7 @@
 - [x] VisionTransformer
 - [ ] Pretrained VisionTransformer
 ## Experiments
-Asset using transformer model comparing to buy-and-hold strategy
+Asset using computer vision model comparing to buy-and-hold strategy
 ### 中租，5871
 - Conformer: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Individual_CV/Models/Model_Result/Conformer-CNN_class2_5871_backtest.png) 
 - Resnet: [Asset](https://github.com/KJJHHH/Stocks/blob/main/Individual_CV/Models/Model_Result/ResNet_class2_5871_backtest.png) 
