@@ -8,3 +8,5 @@ Implementing various deep learning models in stock market analysis
 ### [Portfolio](https://github.com/KJJHHH/Stocks/tree/main/Portfolio)
 - Project from course NCCU machine learning and financial econemetrics  
 - Portfolio in stock, ML method on building portfolio
+### [Sentiment]
+- Progressing...
