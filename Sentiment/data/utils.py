@@ -10,6 +10,10 @@ def translate(text):
     return translation.text
 
 def summarise(text):
+    """
+    NOTE:
+    something went wrong while using cuda
+    """
     summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
     return summarizer(text, max_length=45, min_length=30, do_sample=False)[0]['summary_text']
     try:
