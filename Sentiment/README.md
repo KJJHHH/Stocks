@@ -14,7 +14,7 @@
 ### Price
 - Yahoo finance
 ### Finetune data
-- CH: [CFGPT](https://github.com/TongjiFinLab/CFGPT?tab=readme-ov-file)
+- CH: [CFGPT](https://github.com/TongjiFinLab/CFGPT?tab=readme-ov-file) -> to traditional Chinese
 - EN: ?
 ## Model
 ### finBert: [yiyanghkust/finbert-tone](https://huggingface.co/yiyanghkust/finbert-tone)
