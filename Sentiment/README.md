@@ -1,6 +1,4 @@
 # SENTIMENT ANALYSIS WITH ETF NEWS
-- [ ] finBert
-- [ ] Taide
 ## Data
 - Date/Minutes data
 ### News
