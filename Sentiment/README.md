@@ -1,6 +1,6 @@
 # SENTIMENT ANALYSIS WITH ETF NEWS
-- [ ] finBert: Pretrained model
-- [ ] 
+- [ ] finBert
+- [ ] Taide
 ## Data
 - Date/Minutes data
 ### News
@@ -17,12 +17,11 @@
 ### finBert: [yiyanghkust/finbert-tone](https://huggingface.co/yiyanghkust/finbert-tone)
 Finance finetuned model
 - [x] Pretrained model
-- [ ] Finetuned - Text to Score - Full
+- [x] Finetuned - Text to Score 
 ### Taide: [taide/Llama3-TAIDE-LX-8B-Chat-Alpha1](https://huggingface.co/taide/Llama3-TAIDE-LX-8B-Chat-Alpha1)
 General pretrained model
-- [ ] Pretrained model
-- [ ] Finetune - Text to Text - Full
-- [ ] Finetune - Text to Text - LoRA
+- [x] Pretrained model
+- [x] Finetune - Text to Text - LoRA
 - [ ] Finetune - Text to Score - Full
 ### Finetune data
 - CH
