@@ -32,6 +32,8 @@ def translate(text):
     return translation.text
 
 def summarise(text):
+    pass
+    return text
     """
     NOTE:
     something went wrong while using cuda
@@ -46,7 +48,7 @@ def summarise(text):
         "text-generation", model=model_id, model_kwargs={"torch_dtype": torch.bfloat16}, device_map="auto"
     )
     print(pipeline("Hey how are you doing today?"))
-    """
+    ---
     from transformers import AutoTokenizer, AutoModelForCausalLM
     import torch
     from transformers.utils.hub import move_cache
@@ -60,6 +62,7 @@ def summarise(text):
         torch_dtype=torch.bfloat16,
         device_map="cuda",
     )
+    """
 
     """
     summarizer = pipeline("summarization", model="facebook/bart-large-cnn")

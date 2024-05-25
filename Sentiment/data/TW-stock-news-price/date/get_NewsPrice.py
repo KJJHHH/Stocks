@@ -95,7 +95,7 @@ def get_news_anue(NOW, KEYWORD ="大盤", start = None):
         # update page
         page += 1
 
-def get_news_udn(KEYWORD ="大盤", start = None):
+def get_news_udn(KEYWORD ="大盤",  UPDATE_NEWS = False, start = None):
     """
     - uls: [links]
     - Data: {link: [date, title, content]}
@@ -103,11 +103,17 @@ def get_news_udn(KEYWORD ="大盤", start = None):
     from tqdm import tqdm
     media = 'UDN'
     start = datetime.datetime.strptime(start, "%Y-%m-%d %H:%M:%S")
+    
+    """
+    filename_ch: chinese data
+    filename_en: english data
+    filename_url: article url
+    """
     filename_ch = f'NEWS_{media}_{KEYWORD}_CH.json'
     filename_en = f'NEWS_{media}_{KEYWORD}_EN.json'
     filename_url = f'NEWS_{media}_{KEYWORD}_URL.json'
     
-    links_time_all = load_json(filename_url) if os.path.exists(filename_url) else {}
+    links_all = load_json(filename_url) if os.path.exists(filename_url) else {}
     news_ch = load_json(filename_ch) if os.path.exists(filename_ch) else {}
     news_en = load_json(filename_en) if os.path.exists(filename_en) else {}
     
@@ -126,9 +132,11 @@ def get_news_udn(KEYWORD ="大盤", start = None):
         while True:
             url = f'https://money.udn.com/search/result/1001/{KEYWORD}/{page}'
             htmls = requests.get(url).content
-            soup = BeautifulSoup(htmls, 'html.parser')
-            
+            soup = BeautifulSoup(htmls, 'html.parser')            
             urls_class = soup.find_all('div', {'class': 'story__content'})
+            if urls_class == []:                                                 
+                break
+            
             for div in urls_class:
                 # Check if time < start
                 time = datetime.datetime.strptime(div.find_all('time')[0].text, '%Y-%m-%d %H:%M')
@@ -137,36 +145,32 @@ def get_news_udn(KEYWORD ="大盤", start = None):
                 
                 # article_url
                 link = div.find_all('a', href=True)[0]['href']
-                if link in links_time_all:
+                if link in links_all:
                     continue
                 
-                links_time_all[link] = str(time)
-                store_json(filename_url, links_time_all)
+                links_all[link] = str(time)
+                store_json(filename_url, links_all)
                 
             page += 1
             print(f'\r---> article links at {time}, page {page}', end='', flush=True)
         
+    # Get and store article url in 'filename_url' 
+    get_urls() if UPDATE_NEWS else None 
     
-    # Store article url and store in 'filename_url' 
-    get_urls() 
-    print(f'\r---> Get article links doneeeeeeeeeeeeeeee')
-    print('-----------------')
+    # Print Process
+    print(f'---> Get article links donee')
     print('Start getting article content: ')
     
-    # All link 
-    links_time_all = load_json(filename_url)
+    # All link, data structure: {link: time}
+    links_all = load_json(filename_url)
     
-    # New link
-    new_link = links_time_all.keys() - news_ch.keys()
-    links_time_new = {k: v for k, v in links_time_all.items() if k in new_link}
-    for link, time in tqdm(links_time_new.items()):
+    # New link: get the links that have not scraped and store in 'filename_ch' yet
+    new_link_to_scrape = links_all.keys() - news_ch.keys()
+    links_new = {k: v for k, v in links_all.items() if k in new_link_to_scrape}
+    for link, time in tqdm(links_new.items()):
         """
         Format for store article: {'link': [time, title, content]}
-        """
-        # Get the link and check if already get the article
-        if link not in new_link:
-            continue
-        
+        """        
         # Get the htmls
         htmls = requests.get(link).content
         soup = BeautifulSoup(htmls, 'html.parser')
@@ -208,32 +212,25 @@ def get_news_udn(KEYWORD ="大盤", start = None):
             
 # ------------
 # MAIN
-def main(NOW:bool, TICKERS:str, KEYWORD:str, INTERVAL:str, MEDIA: str, start:str):
-    if NOW:
-        """
-        Get current min data.
-        1. Trigger every morning at 8 am to check if new news 
-        2. If have new news, add the news to past datas
-        """
-        # Get past data
-        if MEDIA == 'UDN':
-            get_news_udn(KEYWORD=KEYWORD, start=start)
-        elif MEDIA == 'ANUE':
-            get_news_anue(NOW=NOW, KEYWORD=KEYWORD, start=start)
-        # Get past price
-        get_price(INTERVAL=INTERVAL, TICKERS=TICKERS)
-    else:
-        # Get past data
-        if MEDIA == 'UDN':
-            get_news_udn(KEYWORD=KEYWORD, start=start)
-        elif MEDIA == 'ANUE':
-            get_news_anue(NOW=NOW, KEYWORD=KEYWORD, start=start)
-        # Get past price
-        get_price(INTERVAL=INTERVAL, TICKERS=TICKERS)
+def main(UPDATE_NEWS:bool, TICKERS:str, KEYWORD:str, INTERVAL:str, MEDIA: str, start:str):
+    """
+    Get current date data.
+    1. Trigger every morning at 8 am to check if new news 
+    2. If have new news, add the news to past datas
+    """
+    # Get past data
+    if MEDIA == 'UDN':
+        get_news_udn(KEYWORD=KEYWORD, UPDATE_NEWS=UPDATE_NEWS, start=start)
+    elif MEDIA == 'other meida name':
+        pass
+    # Get past price
+    get_price(INTERVAL=INTERVAL, TICKERS=TICKERS)
         
 if __name__ == '__main__':
     '''
-    NOW: now -> True / 0 -> False | Get the news 'now' or 'past'
+    # Here still confusion about how to do. Just like this temporary.
+    UPDATE_LATEST_NEWS: get latest news
+    UPDATE_NEWS: get new links (always set to True)
     TICKERS: Tickers to get price
     KEYWORD: Keyword to search news
     INTERVAL: ['1m', '1d']
@@ -241,22 +238,20 @@ if __name__ == '__main__':
     ---
     start: Start time to get news 
     '''
-    NOW = True
-    TICKERS = '0050.TW'
-    KEYWORD = 'ETF'
+    UPDATE_LATEST_NEWS = False
+    UPDATE_NEWS = True
+    TICKERS = '2454.TW'
+    KEYWORD = '聯發科'
     INTERVAL = '1d'
-    MEDIA = 'UDN'
-    
-    # If get 'now' news than don't need start time
-    start = datetime.datetime.now().date().strftime('%Y-%m-%d %H:%M:%S') if NOW else '2019-02-28 00:00:00'
-    print(f'NOW: {NOW}, Tickers: {TICKERS}, Keyword: {KEYWORD}, INTERVAL:{INTERVAL}, MEDIA: {MEDIA}')        
-        
-    main(NOW, TICKERS, KEYWORD, INTERVAL, MEDIA, start)
-
-
-
+    MEDIA = 'UDN'    
+    start = datetime.datetime.now().date().strftime('%Y-%m-%d %H:%M:%S') if UPDATE_LATEST_NEWS else '2019-02-28 00:00:00'      
+    print(f'NOW: {UPDATE_NEWS}, Tickers: {TICKERS}, Keyword: {KEYWORD}, INTERVAL:{INTERVAL}, MEDIA: {MEDIA}')        
+    main(UPDATE_NEWS, TICKERS, KEYWORD, INTERVAL, MEDIA, start)
 
 """
+NOTE:
+Here scrape the yahoo finance price. But do not need these codes since it seems can get it from API.
+----------
 def get_yahoo_finance_url(symbol):
     # Not working at the web: "https://finance.yahoo.com/quote/"
     base_url = 'https://tw.stock.yahoo.com/quote/' 
