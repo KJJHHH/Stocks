@@ -229,20 +229,19 @@ def main(UPDATE_NEWS:bool, TICKERS:str, KEYWORD:str, INTERVAL:str, MEDIA: str, s
 if __name__ == '__main__':
     '''
     # Here still confusion about how to do. Just like this temporary.
-    UPDATE_LATEST_NEWS: get latest news
-    UPDATE_NEWS: get new links (always set to True)
-    TICKERS: Tickers to get price
-    KEYWORD: Keyword to search news
-    INTERVAL: ['1m', '1d']
-    MEDIA: ['UDN', 'ANUE']
-    ---
-    start: Start time to get news 
+    - UPDATE_LATEST_NEWS: get latest news
+    - UPDATE_NEWS: get new links (always set to True)
+    - TICKERS: Tickers to get price
+    - KEYWORD: Keyword to search news
+    - INTERVAL: ['1m', '1d']
+    - MEDIA: ['UDN', 'ANUE']
+    - start: Start time to get news 
     '''
+    TICKERS = '5871.TW'
+    KEYWORD = '中租'
     UPDATE_LATEST_NEWS = False
     UPDATE_NEWS = True
-    TICKERS = '2454.TW'
-    KEYWORD = '聯發科'
-    INTERVAL = '1d'
+    INTERVAL = '1d' 
     MEDIA = 'UDN'    
     start = datetime.datetime.now().date().strftime('%Y-%m-%d %H:%M:%S') if UPDATE_LATEST_NEWS else '2019-02-28 00:00:00'      
     print(f'NOW: {UPDATE_NEWS}, Tickers: {TICKERS}, Keyword: {KEYWORD}, INTERVAL:{INTERVAL}, MEDIA: {MEDIA}')        
