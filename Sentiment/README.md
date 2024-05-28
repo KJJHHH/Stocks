@@ -19,14 +19,14 @@
 
 ### 3.1. TW Stock - 0050
 |                  | Pretrain   | Finetune                                               |
-| ---------------- | ---------- | ------------------------------------------------------ |
+|:----------------:|:----------:|:------------------------------------------------------:|
 | Data-Size (news) |       -    |         6623                                           |
 | Asset            |![alt text](finbert-backtest/0050-pt.png)| ![alt text](finbert-backtest/0050-ft.png) |
 
 ### 3.2. TW Stock - 2409
 |                  | Pretrain   |   Finetune - related data only | Finetune - multiple data  |
-|----------------- | ---------- | ------------------------------ | ------------------------- |
-| Data-Size (news) |     -      |           1301                 |    1301 + 6623           |
+|:----------------:|:----------:|:------------------------------:|:-------------------------:|
+| Data-Size (news) |     -      |           1301                 |    1301 + 6623            |
 | Asset            | ![alt text](finbert-backtest/2409-pt.png) | ![alt text](finbert-backtest/2409-ft.png) | ![alt text](finbert-backtest/2409-ft-m.png)
 
 ## 4. Personal stock agent
