@@ -18,30 +18,15 @@
 </div>
 
 ### 3.2. TW Stock - 0050
-<details> 
-<summary>Backtest Result</summary>
-
 - Data size: 
-- From pretrained model
-![alt text](finbert-backtest-result/0050-pretrain.png)
-- Finetune with 0050 related news data (news keyword: ETF)
-![alt text](finbert-backtest-result/0050-finetune.png)
-</details>
-
+- [From pretrained model](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/0050-pretrain.png)
+- [Finetune with 0050 related news data (news keyword: ETF)](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/0050-finetune.png)
 
 ### 3.3. TW Stock - 2409
-<details> 
-<summary>Backtest Result</summary>
-
 - Data size: 
-- From pretrained model
-![alt text](finbert-backtest-result/2409-pretrain.png)
-- Finetune with 2409 related news data
-![alt text](finbert-backtest-result/2409-finetune.png)
-- Finetune with 2049 related and ETF news data
-![alt text](finbert-backtest-result/2409-finetune-multidata.png)
-</details>
-
+- [From pretrained model](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/2409-pretrain.png)
+- [Finetune with 2409 related news data](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/2409-finetune.png)
+- [Finetune with 2049 related and ETF news data](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/2409-finetune-multidata.png)
 
 
 ## 4. Personal stock agent
