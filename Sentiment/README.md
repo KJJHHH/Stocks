@@ -12,10 +12,7 @@
 
 
 ## 3. Sentiment Analysis
-<div style="border-left: 4px solid #2196F3; background-color: #E3F2FD; padding: 10px; margin-bottom: 10px;">
-  <strong>Model pretrained: finBert -</strong> <a href="https://huggingface.co/yiyanghkust/finbert-tone">yiyanghkust/finbert-tone</a>
-</div>
-
+- Model pretrained: **finBert** - yiyanghkust/finbert-tone
 - Data Size: number of news to finetune
 - Asset: Backtest of strategy. 
     - <span style="color:   #4169E1;">Blue line</span>: trade with sentiment analysis.
