@@ -14,7 +14,7 @@
 ### Model Pretrained
 - finBert: [yiyanghkust/finbert-tone](https://huggingface.co/yiyanghkust/finbert-tone)
 
-### Performance - 0050
+### TW Stock - 0050
 <details> 
 <summary>Backtest Result</summary>
 
@@ -26,7 +26,7 @@
 </details>
 
 
-### Performance - 2409
+### TW Stock - 2409
 <details> 
 <summary>Backtest Result</summary>
 
