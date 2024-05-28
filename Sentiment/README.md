@@ -3,13 +3,12 @@
 - Build sentiment analysis to trade
 - Build personal stock agent with LLM
 ## 2. Data
-### 2.1. News
-- 經濟日報(UDN)
-    - Text and Title
-### 2.2. Price
-- Yahoo finance
-### 2.3. Preprocessing
-- Translate Chinese data to English data: finbert model needs english input.
+- News
+  - 經濟日報(UDN): Text and Title
+- Price
+  - Yahoo finance
+- Preprocessing
+  - Translate Chinese data to English data: finbert model needs english input.
 
 
 ## 3. Sentiment Analysis
