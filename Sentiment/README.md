@@ -17,24 +17,17 @@
   <strong>Model pretrained: finBert-</strong> <a href="https://huggingface.co/yiyanghkust/finbert-tone">yiyanghkust/finbert-tone</a>
 </div>
 
-### 3.2. TW Stock - 0050
+### 3.1. TW Stock - 0050
+|                  | Pretrain   | Finetune                                               |
+| ---------------- | ---------- | ------------------------------------------------------ |
+| Data-Size (news) |       -    |         6623                                           |
+| Asset            |![alt text](finbert-backtest/0050-pt.png)| ![alt text](finbert-backtest/0050-ft.png) |
 
-|           | Pretrain   | Finetune                                               |
-| --------- | ---------- | ------------------------------------------------------ |
-| Data Size |            |                                                        |
-| Asset     |![alt text](finbert-backtest/0050-pt.png)| ![alt text](finbert-backtest/0050-ft.png) |
-
-### 3.3. TW Stock - 2409
-|           | Pretrain   |   Finetune - related data only | Finetune - multiple data  |
-|---------- | ---------- | ------------------------------ | ------------------------- |
-| Data Size |            |                                |                           |
-| Asset     | ![alt text](finbert-backtest/2409-pt.png) | ![alt text](finbert-backtest/2409-ft.png) | ![alt text](finbert-backtest/2409-ft-m.png)
-- Data size: 
-- Backtest result
-    - [From pretrained model](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/2409-pretrain.png)
-    - [Finetune with 2409 related news data](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/2409-finetune.png)
-    - [Finetune with 2049 related and ETF news data](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/2409-finetune-multidata.png)
-
+### 3.2. TW Stock - 2409
+|                  | Pretrain   |   Finetune - related data only | Finetune - multiple data  |
+|----------------- | ---------- | ------------------------------ | ------------------------- |
+| Data-Size (news) |     -      |           1301                 |    1301 + 6623           |
+| Asset            | ![alt text](finbert-backtest/2409-pt.png) | ![alt text](finbert-backtest/2409-ft.png) | ![alt text](finbert-backtest/2409-ft-m.png)
 
 ## 4. Personal stock agent
 ### 4.1. Model Pretrained
