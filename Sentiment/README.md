@@ -14,11 +14,12 @@
 
 ## 3. Sentiment Analysis
 <div style="border-left: 4px solid #2196F3; background-color: #E3F2FD; padding: 10px; margin-bottom: 10px;">
-  <strong>finBert: </strong> <a href="https://huggingface.co/yiyanghkust/finbert-tone">yiyanghkust/finbert-tone</a>
+  <strong>Model pretrained: finBert-</strong> <a href="https://huggingface.co/yiyanghkust/finbert-tone">yiyanghkust/finbert-tone</a>
 </div>
 
 ### 3.2. TW Stock - 0050
 - Data size: 
+- Backtest result
     - [From pretrained model](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/0050-pretrain.png)
     - [Finetune with 0050 related news data (news keyword: ETF)](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/0050-finetune.png)
 
