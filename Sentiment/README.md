@@ -1,22 +1,22 @@
 # SENTIMENT ANALYSIS AND STOCK AGENT LM
-## Goal
+## 1. Goal
 - Build sentiment analysis to trade
 - Build personal stock agent with LLM
-## Data
-### News
+## 2. Data
+### 2.1. News
 - 經濟日報(UDN)
     - Text and Title
-### Price
+### 2.2. Price
 - Yahoo finance
 ### Preprocessing
 - Translate Chinese data to English data: finbert model needs english input.
 
 
-# Sentiment Analysis
-### Model Pretrained
+## 3. Sentiment Analysis
+### 3.1. Model Pretrained
 - finBert: [yiyanghkust/finbert-tone](https://huggingface.co/yiyanghkust/finbert-tone)
 
-### TW Stock - 0050
+### 3.2. TW Stock - 0050
 <details> 
 <summary>Backtest Result</summary>
 
@@ -28,7 +28,7 @@
 </details>
 
 
-### TW Stock - 2409
+### 3.3. TW Stock - 2409
 <details> 
 <summary>Backtest Result</summary>
 
@@ -43,10 +43,9 @@
 
 
 
-# Personal stock agent
-### Model Pretrained
+## 4. Personal stock agent
+### 4.1. Model Pretrained
 - Taide: [taide/Llama3-TAIDE-LX-8B-Chat-Alpha1](https://huggingface.co/taide/Llama3-TAIDE-LX-8B-Chat-Alpha1)
-
 - Chinese Mediatek Model
     - Pretrained:
     - Finetune
@@ -55,5 +54,5 @@
 NOTE:
 - Summarise model: llama3
 
-## Improvement
+## 5. Possible Improvement
 - In minutes
