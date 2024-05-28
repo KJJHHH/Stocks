@@ -8,7 +8,7 @@
     - Text and Title
 ### 2.2. Price
 - Yahoo finance
-### Preprocessing
+### 2.3. Preprocessing
 - Translate Chinese data to English data: finbert model needs english input.
 
 
