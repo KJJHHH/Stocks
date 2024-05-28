@@ -17,6 +17,11 @@
   <strong>Model pretrained: finBert-</strong> <a href="https://huggingface.co/yiyanghkust/finbert-tone">yiyanghkust/finbert-tone</a>
 </div>
 
+|           | Pretrain   | Finetune                                               |
+| --------- | ---------- | ------------------------------------------------------ |
+| data size |            |                                                        |
+| Asset     |![alt text](finbert-backtest/0050-pt.png)| ![alt text](finbert-backtest/0050-ft.png) |
+
 ### 3.2. TW Stock - 0050
 - Data size: 
 - Backtest result
