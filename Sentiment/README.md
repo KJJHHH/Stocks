@@ -1,5 +1,5 @@
-# SENTIMENT ANALYSIS WITH ETF NEWS
-## Goals
+# SENTIMENT ANALYSIS AND STOCK AGENT LM
+## Goal
 - Build sentiment analysis to trade
 - Build personal stock agent with LLM
 ## Data
@@ -10,7 +10,9 @@
 - Yahoo finance
 ### Preprocessing
 - Translate Chinese data to English data: finbert model needs english input.
-## Sentiment Analysis
+
+
+# Sentiment Analysis
 ### Model Pretrained
 - finBert: [yiyanghkust/finbert-tone](https://huggingface.co/yiyanghkust/finbert-tone)
 
@@ -41,7 +43,7 @@
 
 
 
-## Personal stock agent
+# Personal stock agent
 ### Model Pretrained
 - Taide: [taide/Llama3-TAIDE-LX-8B-Chat-Alpha1](https://huggingface.co/taide/Llama3-TAIDE-LX-8B-Chat-Alpha1)
 
