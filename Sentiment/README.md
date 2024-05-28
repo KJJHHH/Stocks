@@ -17,18 +17,18 @@
   <strong>Model pretrained: finBert-</strong> <a href="https://huggingface.co/yiyanghkust/finbert-tone">yiyanghkust/finbert-tone</a>
 </div>
 
+### 3.2. TW Stock - 0050
+
 |           | Pretrain   | Finetune                                               |
 | --------- | ---------- | ------------------------------------------------------ |
-| data size |            |                                                        |
+| Data Size |            |                                                        |
 | Asset     |![alt text](finbert-backtest/0050-pt.png)| ![alt text](finbert-backtest/0050-ft.png) |
 
-### 3.2. TW Stock - 0050
-- Data size: 
-- Backtest result
-    - [From pretrained model](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/0050-pretrain.png)
-    - [Finetune with 0050 related news data (news keyword: ETF)](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/0050-finetune.png)
-
 ### 3.3. TW Stock - 2409
+|           | Pretrain   |   Finetune - related data only | Finetune - multiple data  |
+|---------- | ---------- | ------------------------------ | ------------------------- |
+| Data Size |            |                                |                           |
+| Asset     | ![alt text](finbert-backtest/2409-pt.png) | ![alt text](finbert-backtest/2409-ft.png) | ![alt text](finbert-backtest/2409-ft-m.png)
 - Data size: 
 - Backtest result
     - [From pretrained model](https://github.com/KJJHHH/Stocks/blob/main/Sentiment/finbert-backtest-result/2409-pretrain.png)
