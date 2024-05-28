@@ -4,6 +4,9 @@
 
 In this analysis, we evaluate the performance of sentiment analysis using the FinBERT model on two Taiwanese stocks: TW Stock 0050 and 2409. The study involves comparing the outcomes of pretraining and finetuning phases, accompanied by backtesting strategies to gauge asset performance.
 
+Additionally, we aim to leverage the insights gained from sentiment analysis to build a personal investment advisor. This advisor will summarize news articles and provide simple insights to assist investors in making informed decisions.
+
+
 ## 2. Data Overview
 
 - **TW Stock 0050**
