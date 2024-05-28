@@ -1,44 +1,50 @@
 # SENTIMENT ANALYSIS WITH ETF NEWS
+## Goals
+- Build sentiment analysis to trade
+- Build personal stock agent with LLM
 ## Data
-- Date/Minutes data
 ### News
 - 經濟日報(UDN)
-- Process
-    1. Scrape the news' time, title, and content
-    2. Translate to English for finBert model
-    3. Summarise the content. Summarise model
-        - EN: "facebook/bart-large-cnn"
-        - CH: ? 
+    - Text and Title
 ### Price
 - Yahoo finance
-## Model
-### finBert: [yiyanghkust/finbert-tone](https://huggingface.co/yiyanghkust/finbert-tone)
-Finance finetuned model
-- [x] Pretrained model
-- [x] Finetuned - Text to Score 
-### Taide: [taide/Llama3-TAIDE-LX-8B-Chat-Alpha1](https://huggingface.co/taide/Llama3-TAIDE-LX-8B-Chat-Alpha1)
-General pretrained model
-- [x] Pretrained model
-- [x] Finetune - Text to Text - LoRA
-- [ ] Finetune - Text to Score - Full
-### Finetune data
-- CH
-    - Text to text finetuning: [CFGPT](https://github.com/TongjiFinLab/CFGPT?tab=readme-ov-file) -> to traditional Chinese
-    - Text to score finetuning
-- EN
-    - Text to score finetuning
-## Method
-- FinBert
-    - Pretrained:
-        1. Score the sentiment for each article
-        2. Calculate the mean score for articles in the same date
-    - Finetune:
-        <aside>
-        💡 NOTE: summarise a lot to fit the max input limit for summarise and finBert model
-        </aside>
-        1. Summarise articles
-        2. Concatenate all articles in the same date
-        3. Summarise again...
+### Preprocessing
+- Translate Chinese data to English data: finbert model needs english input.
+## Sentiment Analysis
+### Model Pretrained
+- finBert: [yiyanghkust/finbert-tone](https://huggingface.co/yiyanghkust/finbert-tone)
+
+### Performance - 0050
+<details> 
+<summary>Backtest Result</summary>
+
+- Data size: 
+- From pretrained model
+![alt text](finbert-backtest-result/0050-pretrain.png)
+- Finetune with 0050 related news data (news keyword: ETF)
+![alt text](finbert-backtest-result/0050-finetune.png)
+</details>
+
+
+### Performance - 2409
+<details> 
+<summary>Backtest Result</summary>
+
+- Data size: 
+- From pretrained model
+![alt text](finbert-backtest-result/2409-pretrain.png)
+- Finetune with 2409 related news data
+![alt text](finbert-backtest-result/2409-finetune.png)
+- Finetune with 2049 related and ETF news data
+![alt text](finbert-backtest-result/2409-finetune-multidata.png)
+</details>
+
+
+
+## Personal stock agent
+### Model Pretrained
+- Taide: [taide/Llama3-TAIDE-LX-8B-Chat-Alpha1](https://huggingface.co/taide/Llama3-TAIDE-LX-8B-Chat-Alpha1)
+
 - Chinese Mediatek Model
     - Pretrained:
     - Finetune
@@ -46,3 +52,6 @@ General pretrained model
         - Text to sentiment
 NOTE:
 - Summarise model: llama3
+
+## Improvement
+- In minutes
