@@ -13,8 +13,9 @@
 
 
 ## 3. Sentiment Analysis
-### 3.1. Model Pretrained
-- finBert: [yiyanghkust/finbert-tone](https://huggingface.co/yiyanghkust/finbert-tone)
+<div style="border-left: 4px solid #2196F3; background-color: #E3F2FD; padding: 10px; margin-bottom: 10px;">
+  <strong>finBert: </strong> <a href="https://huggingface.co/yiyanghkust/finbert-tone">yiyanghkust/finbert-tone</a>
+</div>
 
 ### 3.2. TW Stock - 0050
 <details> 
