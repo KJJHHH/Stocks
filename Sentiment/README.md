@@ -18,7 +18,9 @@
 </div>
 
 - Data Size: number of news to finetune
-- Asset: Backtest of strategy. <span style="color:   #4169E1;">Blue line</span>: trade with sentiment analysis. <span style="color: orange;">Orange line</span>: buy and hold.
+- Asset: Backtest of strategy. 
+    - <span style="color:   #4169E1;">Blue line</span>: trade with sentiment analysis.
+    - <span style="color: orange;">Orange line</span>: buy and hold.
 
 ### 3.1. TW Stock - 0050
 |       | Pretrain   | Finetune                                               |
