@@ -20,54 +20,63 @@ Additionally, we aim to leverage the insights gained from sentiment analysis to 
     - Multiple Data (Related and Unrelated): 1301 + 6623 news articles
 
 ## 3. Sentiment Analysis Performance
-- <span style="color:   #4169E1;">Blue line</span>: trade with sentiment analysis.
-- <span style="color: orange;">Orange line</span>: buy and hold.
-
 ```
 ### NOTE
 - Finetuning Strategies:
   - Related Data Only: Finetune with news articles related to the stock.
   - Multiple Data: Finetune with both related and unrelated news articles.
 - Some of the backtest results below shows flat line at the last few day since I have not update the news yet.
+- The blue line is backtest result with sentiment analysis while the orange line is buy and hold strategy.
 ```
 
 ### 3.1. TW Stock 0050
 - **Pretraining** vs. **Finetuning**
 
-|       | Pretrain   | Finetune                                               |
-|:-----:|:----------:|:------------------------------------------------------:|
-| Data  |       -    |         6623                                           |
-| Asset |![Pretraining Performance](finbert-backtest/0050-pt.png)| ![Finetuning Performance](finbert-backtest/0050-ft.png) |
+|                | Pretrain   | Finetune       |  Buy and Hold |
+|:--------------:|:----------:|:--------------:|:-------------:|
+| Data           |       -    |         6623   |       -       |
+| Daily Avg. Ret |  0.259%    |       0.399%   |   0.250%      |
+| Dailt Std.     |  0.807%    |      0.949%    |  1.31%        |
+| Asset          |![Pretraining Performance](finbert-backtest/0050-pt.png)| ![Finetuning Performance](finbert-backtest/0050-ft.png) | - |
 
 ### 3.2. TW Stock 2409
 
-|       | Pretrain   |   Finetune - Related Data Only | Finetune - Multiple Data  |
-|:-----:|:----------:|:------------------------------:|:-------------------------:|
-| Data  |     -      |           1301                 |    1301 + 6623            |
-| Asset | ![Pretraining Performance](finbert-backtest/2409-pt.png) | ![Related Data Only](finbert-backtest/2409-ft.png) | ![Multiple Data](finbert-backtest/2409-ft-m.png) |
+|                | Pretrain   |   Finetune - Related Data Only | Finetune - Multiple Data  | Buy and Hold |
+|:--------------:|:----------:|:------------------------------:|:-------------------------:|:------------:|
+| Data           |     -      |           1301                 |    1301 + 6623            |     -        |
+| Daily Avg. Ret |  0.043%    |        -0.09%                  |      0.167%               | 0.023%       |
+| Dailt Std.     |   1.28%    |           1.35%                |          1.50%            |     1.75%    |
+| Asset          | ![Pretraining Performance](finbert-backtest/2409-pt.png) | ![Related Data Only](finbert-backtest/2409-ft.png) | ![Multiple Data](finbert-backtest/2409-ft-m.png) | - |
 
-### 3.3 TW Stock 2330
+### 3.3 TW Stock 2454
 
-|       | Pretrain   |   Finetune - Related Data Only | Finetune - Multiple Data  |
-|:-----:|:----------:|:------------------------------:|:-------------------------:|
-| Data  |     -      |           1301                 |    1301 + 6623            |
-| Asset | ![Pretraining Performance](finbert-backtest/2330-pt.png) | ![Related Data Only](finbert-backtest/2330-ft.png) | ![Multiple Data](finbert-backtest/2330-ft-m.png) |
-
-
-### 3.4 TW Stock 2454
-
-|       | Pretrain   |   Finetune - Related Data Only | Finetune - Multiple Data  |
-|:-----:|:----------:|:------------------------------:|:-------------------------:|
-| Data  |     -      |           1301                 |    1301 + 6623            |
+|                | Pretrain   |   Finetune - Related Data Only | Finetune - Multiple Data  | Buy and Hold |
+|:--------------:|:----------:|:------------------------------:|:-------------------------:|:------------:|
+| Data           |     -      |           3423                 |    3423 + 6623            |              |
+| Daily Avg. Ret |    0.21%   |        -0.408%                 |    -0.035%                | 0.439%       |
+| Dailt Std.     |    1.85%   |           2.551%               |      2.641%               | 2.635%       |
 | Asset | ![Pretraining Performance](finbert-backtest/2454-pt.png) | ![Related Data Only](finbert-backtest/2454-ft.png) | ![Multiple Data](finbert-backtest/2454-ft-m.png) |
+
+### 3.4 TW Stock 2330
+
+|                | Pretrain   |   Finetune - Related Data Only | Finetune - Multiple Data  | Buy and Hold |
+|:--------------:|:----------:|:------------------------------:|:-------------------------:|:------------:|
+| Data           |     -      |           10195                |    10195 + 6623           |     -        |
+| Daily Avg. Ret |  0.133%    |        0.097%                  |    0.131%                 |  0.32%       |
+| Dailt Std.     |  1.529%    |            1.558%              |         1.562%            |    1.872%    |
+| Asset          | ![Pretraining Performance](finbert-backtest/2330-pt.png) | ![Related Data Only](finbert-backtest/2330-ft.png) | ![Multiple Data](finbert-backtest/2330-ft-m.png) | - |
+
+
 
 
 ### 3.5 TW Stock 5871
 
-|       | Pretrain   |   Finetune - Related Data Only | Finetune - Multiple Data  |
-|:-----:|:----------:|:------------------------------:|:-------------------------:|
-| Data  |     -      |           1301                 |    1301 + 6623            |
-| Asset | ![Pretraining Performance](finbert-backtest/5871-pt.png) | ![Related Data Only](finbert-backtest/5871-ft.png) | ![Multiple Data](finbert-backtest/5871-ft-m.png) |
+|                | Pretrain   |   Finetune - Related Data Only | Finetune - Multiple Data  | Buy and Hold |
+|:--------------:|:----------:|:------------------------------:|:-------------------------:|:------------:|
+| Data           |     -      |           323                  |     323 + 6623            |         -    |
+| Daily Avg. Ret |  0.125%    |       0.130%                   |        0.221%             |  -0.125%     |
+| Dailt Std.     |  0.551%    |       1.01%                    |       1.022%              |   1.817%     |
+| Asset          | ![Pretraining Performance](finbert-backtest/5871-pt.png) | ![Related Data Only](finbert-backtest/5871-ft.png) | ![Multiple Data](finbert-backtest/5871-ft-m.png) |
 
 
 ## 4. Personal stock agent
