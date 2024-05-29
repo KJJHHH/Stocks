@@ -20,16 +20,14 @@ Additionally, we aim to leverage the insights gained from sentiment analysis to 
     - Multiple Data (Related and Unrelated): 1301 + 6623 news articles
 
 ## 3. Sentiment Analysis Performance
-```
-### NOTE
-- Finetuning Data
-    - Related Data Only: Finetune with news articles related to the stock
-    - Multiple Data: Finetune with both related and unrelated news articles
-- The lines in below graphs
-    - Blue line is sentiment analysis strategy
-    - Orange line is buy and hold strategy
-- Some of the backtest results below shows flat line at the last few day since I have not update the news yet
-```
+### 3.0 NOTE
+- Finetuning Data:
+  - Related Data Only: Finetuned with news articles related to the stock
+  - Multiple Data: Finetuned with both related and unrelated news articles
+- Graphs:
+  - Blue line represents the sentiment analysis strategy
+  - Orange line represents the buy and hold strategy
+- Some backtest results show a flat line at the last few days due to not updating the news yet.
 
 ### 3.1. TW Stock 0050
 - **Pretraining** vs. **Finetuning**
@@ -80,11 +78,13 @@ Additionally, we aim to leverage the insights gained from sentiment analysis to 
 | Dailt Std.     |  0.551%    |       1.01%                    |       1.022%              |   1.817%     |
 | Asset          | ![Pretraining Performance](finbert-backtest/5871-pt.png) | ![Related Data Only](finbert-backtest/5871-ft.png) | ![Multiple Data](finbert-backtest/5871-ft-m.png) | - |
 
+## 4. Summary and Future Directions
+- For single stocks, there may not be enough data to finetune effectively. It may be necessary to finetune with news related to other keywords.
+- The two stocks where the finetuning method did not perform well (2330 and 2454) are both related to the AI industry. Keywords related to AI might be more suitable for these kinds of stocks.
 
 ## 4. Personal stock agent
 ### 4.1. Model Pretrained
 - Taide: [taide/TAIDE-LX-7B-Chat](https://huggingface.co/taide/TAIDE-LX-7B-Chat)
 
 
-## 5. Future Directions
-- Add more news data: including the keyword for industry.
+
