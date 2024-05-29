@@ -18,8 +18,8 @@ def get_price(TICKERS = '00940.TW', INTERVAL = '1d'):
     import pickle
     
     now = datetime.datetime.now()
-    start = datetime.datetime.strptime('2010-01-01', "%Y-%m-%d")
-    price = yf.download(TICKERS,start=start, end=now, interval=INTERVAL)['Close']
+    start = datetime.datetime.strptime('2015-01-01', "%Y-%m-%d")
+    price = yf.download(TICKERS,start=start, end=now, interval=INTERVAL)['Adj Close']
     with open(f'PRICE_{TICKERS}_{INTERVAL}.pickle', 'wb') as f:
         pickle.dump(price, f)
 
@@ -220,7 +220,8 @@ def main(UPDATE_NEWS:bool, TICKERS:str, KEYWORD:str, INTERVAL:str, MEDIA: str, s
     """
     # Get past data
     if MEDIA == 'UDN':
-        get_news_udn(KEYWORD=KEYWORD, UPDATE_NEWS=UPDATE_NEWS, start=start)
+        pass
+        # get_news_udn(KEYWORD=KEYWORD, UPDATE_NEWS=UPDATE_NEWS, start=start)
     elif MEDIA == 'other meida name':
         pass
     # Get past price
@@ -238,7 +239,7 @@ if __name__ == '__main__':
     - start: Start time to get news 
     '''
     TICKERS = '5871.TW'
-    KEYWORD = '中租'
+    KEYWORD = 'ETF'
     UPDATE_LATEST_NEWS = False
     UPDATE_NEWS = True
     INTERVAL = '1d' 

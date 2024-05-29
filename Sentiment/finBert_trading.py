@@ -213,18 +213,19 @@ class finBert_Sentiment(nn.Module):
     
     def backtesting(self, df_backtest):                                    
         df_backtest['pred_label'] = df_backtest['pred_label'].replace(2, -1)
-        df_backtest['senti-return'] = df_backtest['pred_label'] * df_backtest['Close']
+        df_backtest['senti-return'] = df_backtest['pred_label'] * df_backtest['Adj Close']
         df_backtest['senti-asset'] = (df_backtest['senti-return'] + 1).cumprod()
-        df_backtest['buyhold-asset'] = (df_backtest['Close'] + 1).cumprod()
+        df_backtest['buyhold-asset'] = (df_backtest['Adj Close'] + 1).cumprod()
         
         senti_mean = np.mean(df_backtest['senti-return'])
-        buyhold_mean = np.mean(df_backtest['Close'])
+        buyhold_mean = np.mean(df_backtest['Adj Close'])
         senti_std = np.std(df_backtest['senti-return'])
-        buyhold_std = np.std(df_backtest['Close'])
+        buyhold_std = np.std(df_backtest['Adj Close'])
         print(f'Average daily return | sentiment: {senti_mean} | buyhold: {buyhold_mean}')
         print(f'Std daily return     | sentiment: {senti_std}  | buyhold: {buyhold_std}')        
         
-        plt.figure(figsize=(12,6))
+        plt.figure(figsize=(8,6))
+        # plt.ylim(.9, 1.4)
         plt.plot(df_backtest['senti-asset'], label = 'sentiment')
         plt.plot(df_backtest['buyhold-asset'], label = 'buyhold')
         plt.legend()
