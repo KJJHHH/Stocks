@@ -25,9 +25,9 @@ Additionally, we aim to leverage the insights gained from sentiment analysis to 
 
 ```
 ### NOTE
-- **Finetuning Strategies**:
-  - **Related Data Only**: Finetune with news articles related to the stock.
-  - **Multiple Data**: Finetune with both related and unrelated news articles.
+- Finetuning Strategies:
+  - Related Data Only: Finetune with news articles related to the stock.
+  - Multiple Data: Finetune with both related and unrelated news articles.
 - Some of the backtest results below shows flat line at the last few day since I have not update the news yet.
 ```
 
