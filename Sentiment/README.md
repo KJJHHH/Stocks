@@ -27,7 +27,8 @@ Additionally, we aim to leverage the insights gained from sentiment analysis to 
 - Graphs:
   - Blue line represents the sentiment analysis strategy
   - Orange line represents the buy and hold strategy
-- Some backtest results show a flat line at the last few days due to not updating the news yet.
+- Some backtest results show a flat line at the last few days due to not updating the news yet. 
+- The backtest do not take transaction fee into account
 
 ### 3.1. TW Stock 0050
 - **Pretraining** vs. **Finetuning**
