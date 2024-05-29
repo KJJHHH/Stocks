@@ -22,11 +22,13 @@ Additionally, we aim to leverage the insights gained from sentiment analysis to 
 ## 3. Sentiment Analysis Performance
 ```
 ### NOTE
-- Finetuning Strategies:
-  - Related Data Only: Finetune with news articles related to the stock.
-  - Multiple Data: Finetune with both related and unrelated news articles.
-- Some of the backtest results below shows flat line at the last few day since I have not update the news yet.
-- The blue line is backtest result with sentiment analysis while the orange line is buy and hold strategy.
+- Finetuning Data
+    - Related Data Only: Finetune with news articles related to the stock
+    - Multiple Data: Finetune with both related and unrelated news articles
+- The lines in below graphs
+    - Blue line is sentiment analysis strategy
+    - Orange line is buy and hold strategy
+- Some of the backtest results below shows flat line at the last few day since I have not update the news yet
 ```
 
 ### 3.1. TW Stock 0050
@@ -55,7 +57,7 @@ Additionally, we aim to leverage the insights gained from sentiment analysis to 
 | Data           |     -      |           3423                 |    3423 + 6623            |              |
 | Daily Avg. Ret |    0.21%   |        -0.408%                 |    -0.035%                | 0.439%       |
 | Dailt Std.     |    1.85%   |           2.551%               |      2.641%               | 2.635%       |
-| Asset | ![Pretraining Performance](finbert-backtest/2454-pt.png) | ![Related Data Only](finbert-backtest/2454-ft.png) | ![Multiple Data](finbert-backtest/2454-ft-m.png) |
+| Asset | ![Pretraining Performance](finbert-backtest/2454-pt.png) | ![Related Data Only](finbert-backtest/2454-ft.png) | ![Multiple Data](finbert-backtest/2454-ft-m.png) | - |
 
 ### 3.4 TW Stock 2330
 
@@ -76,7 +78,7 @@ Additionally, we aim to leverage the insights gained from sentiment analysis to 
 | Data           |     -      |           323                  |     323 + 6623            |         -    |
 | Daily Avg. Ret |  0.125%    |       0.130%                   |        0.221%             |  -0.125%     |
 | Dailt Std.     |  0.551%    |       1.01%                    |       1.022%              |   1.817%     |
-| Asset          | ![Pretraining Performance](finbert-backtest/5871-pt.png) | ![Related Data Only](finbert-backtest/5871-ft.png) | ![Multiple Data](finbert-backtest/5871-ft-m.png) |
+| Asset          | ![Pretraining Performance](finbert-backtest/5871-pt.png) | ![Related Data Only](finbert-backtest/5871-ft.png) | ![Multiple Data](finbert-backtest/5871-ft-m.png) | - |
 
 
 ## 4. Personal stock agent
