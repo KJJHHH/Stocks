@@ -220,8 +220,7 @@ def main(UPDATE_NEWS:bool, TICKERS:str, KEYWORD:str, INTERVAL:str, MEDIA: str, s
     """
     # Get past data
     if MEDIA == 'UDN':
-        pass
-        # get_news_udn(KEYWORD=KEYWORD, UPDATE_NEWS=UPDATE_NEWS, start=start)
+        get_news_udn(KEYWORD=KEYWORD, UPDATE_NEWS=UPDATE_NEWS, start=start)
     elif MEDIA == 'other meida name':
         pass
     # Get past price
@@ -238,8 +237,8 @@ if __name__ == '__main__':
     - MEDIA: ['UDN', 'ANUE']
     - start: Start time to get news 
     '''
-    TICKERS = '5871.TW'
-    KEYWORD = 'ETF'
+    TICKERS = '2357.TW'
+    KEYWORD = '華碩'
     UPDATE_LATEST_NEWS = False
     UPDATE_NEWS = True
     INTERVAL = '1d' 
