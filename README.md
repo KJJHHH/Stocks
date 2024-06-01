@@ -9,4 +9,5 @@ Implementing various deep learning models in stock market analysis
 - Project from course NCCU machine learning and financial econemetrics  
 - Portfolio in stock, ML method on building portfolio
 ### [Sentiment](https://github.com/KJJHHH/Stocks/tree/main/Sentiment)
-- Progressing...
+- Enhancing Sentiment Analysis in News with Fine-Tuning Techniques for Language Models
+### [Ensemble Trading]()
