@@ -1,13 +1,13 @@
-# Sentiment Analysis Performance Comparison using FinBERT
+# 1. Sentiment Analysis Performance Comparison using FinBERT
 
-## 1. Introduction
+## Introduction
 
 In this analysis, we evaluate the performance of sentiment analysis using the FinBERT model on two Taiwanese stocks: TW Stock 0050 and 2409. The study involves comparing the outcomes of pretraining and finetuning phases, accompanied by backtesting strategies to gauge asset performance.
 
 Additionally, we aim to leverage the insights gained from sentiment analysis to build a personal investment advisor. This advisor will summarize news articles and provide simple insights to assist investors in making informed decisions.
 
 
-## 2. Data Overview
+## Data
 
 - **TW Stock 0050**
   - **Pretraining Data**: Not applicable (N/A)
@@ -19,7 +19,7 @@ Additionally, we aim to leverage the insights gained from sentiment analysis to 
     - Related Data Only: 1301 news articles
     - Multiple Data (Related and Unrelated): 1301 + 6623 news articles
 
-## 3. Sentiment Analysis Performance
+## Sentiment Analysis Performance
 ### 3.0 NOTE
 - Finetuning Data:
   - Related Data Only: Finetuned with news articles related to the stock
@@ -79,13 +79,23 @@ Additionally, we aim to leverage the insights gained from sentiment analysis to 
 | Dailt Std.     |  0.551%    |       1.01%                    |       1.022%              |   1.817%     |
 | Asset          | ![Pretraining Performance](finbert-backtest/5871-pt.png) | ![Related Data Only](finbert-backtest/5871-ft.png) | ![Multiple Data](finbert-backtest/5871-ft-m.png) | - |
 
-## 4. Summary and Future Directions
+## Summary and Future Directions
 - For single stocks, there may not be enough data to finetune effectively. It may be necessary to finetune with news related to other keywords.
 - The two stocks where the finetuning method did not perform well (2330 and 2454) are both related to the AI industry. Keywords related to AI might be more suitable for these kinds of stocks.
 
-## 4. Personal stock agent
-### 4.1. Model Pretrained
+# 2. Personal stock agent
+## Introduction
+Additionally, we aim to leverage the insights gained from sentiment analysis to build a personal investment advisor. This advisor will summarize news articles and provide simple insights to assist investors in making informed decisions.
+
+## Data
+- [CFGPT](https://github.com/TongjiFinLab/CFGPT)
+
+## Model
 - Taide: [taide/TAIDE-LX-7B-Chat](https://huggingface.co/taide/TAIDE-LX-7B-Chat)
+
+## Demo
+![alt text](2409.png)
+
 
 
 

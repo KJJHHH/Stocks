@@ -6,30 +6,26 @@ from tqdm import tqdm
 from bs4 import BeautifulSoup
 from datetime import datetime, time, timedelta
 from googletrans import Translator
-from transformers import BertTokenizer, BertForSequenceClassification
 
 def translate(text):
     translator = Translator()
     translation = translator.translate(text, dest='en')
     return translation.text
 
-def get_news_urls(KEYWORD):
+def get_news_urls(keyword):
     yesterday = datetime.today().date() - timedelta(days=1)
     start = datetime.combine(yesterday, time.min)
+    page, date_time = 1, None
+    print(f'Retrieving news links published after {start} in page (https://money.udn.com/search/result/1001/{keyword}/[page])')
         
     links_all = {}
-    page, date_time = 1, None
-        
-    print('-----------------')
-    print(f'Scrape news after {start}')
-    print('Start getting article links: ', f'https://money.udn.com/search/result/1001/{KEYWORD}/{page}')
-    
     while True:
-        url = f'https://money.udn.com/search/result/1001/{KEYWORD}/{page}'
+        url = f'https://money.udn.com/search/result/1001/{keyword}/{page}'
         htmls = requests.get(url).content
         soup = BeautifulSoup(htmls, 'html.parser')            
         urls_class = soup.find_all('div', {'class': 'story__content'})
-        if urls_class == []:                                               
+        if urls_class == []:
+            print('No Content')
             break
         
         for div in urls_class:
@@ -40,21 +36,18 @@ def get_news_urls(KEYWORD):
             
             # article_url
             link = div.find_all('a', href=True)[0]['href']
-            if link in links_all:
-                continue
-            
             links_all[link] = str(date_time)
             # print(links_all)            
         page += 1
-        
+    
     return links_all
 
-def get_news_text(KEYWORD ="友達"):
+def get_news_text(keyword ="友達", task = 'sa'):
     news_ch = {}
     news_en = {}
         
     # Get and store article url in 'filename_url' 
-    links_all = get_news_urls(KEYWORD)
+    links_all = get_news_urls(keyword)
     
     for link, time in tqdm(links_all.items()):
         """
@@ -76,25 +69,28 @@ def get_news_text(KEYWORD ="友達"):
         
         # Concat and translate
         content_article = ''
+        
         for con in content:
             con_ = con.text
             if '延伸閱讀' in con_:
                 continue
-            try:
-                content_article += con_
-            except:
-                print('translate error')
+            content_article += con_
+            
         if content_article == '':
             continue
         
         # Store the data
         news_ch[link] = [time, title, content_article]
-        try:
-            # To find translate error just find what news in ch but not in en
-            news_en[link] = [time, translate(title), translate(content_article)]
-        except:
-            print('Translate error')
-            
+        
+        # Sentiment analysis need english news
+        # To find what news got translate error just find what news in ch but not in en
+        if task == 'st':
+            try:
+                news_en[link] = [time, translate(title), translate(content_article)]
+            except:
+                print('Translate error')
+
+    print('Finish Scraping')
     return news_ch, news_en
 
 def labelling(price):
@@ -106,6 +102,8 @@ def labelling(price):
         return 0
 
 def senti(news):
+    from transformers import BertTokenizer, BertForSequenceClassification
+    
     # Get the concated titles for yesterday's news
     title_concat = ''
     for link, infos in tqdm(news.items()):
@@ -199,7 +197,15 @@ You are a helpful assistant and good at writing Tang poem. 你是一個樂於助
 
     return output
 
-def agent(news):
+def importance():
+    # delete not important news
+    """
+    Need to finetune another model
+    """
+    pass
+
+def agent(company_name, news):
+    import numpy as np
     from transformers import AutoTokenizer, AutoConfig, AutoModelForCausalLM, BitsAndBytesConfig
     from transformers import GenerationConfig
     from peft import (
@@ -210,12 +216,6 @@ def agent(news):
         prepare_model_for_kbit_training,
         PeftModel
     )
-    
-    # Get the concated titles for yesterday's news
-    title_concat = ''
-    for link, infos in tqdm(news.items()):
-        time, title, content = infos
-        title_concat += title + '\n'
 
     # Load model from checkpoints
     ckpt_dir = 'taide-checkpoints-exp1'
@@ -230,7 +230,7 @@ def agent(news):
     model_name = './TAIDE-LX-7B-Chat'
     cache_dir = './cache'
     
-    max_len = 128   # 生成回復的最大長度
+    max_len = 128*(4)   # 生成回復的最大長度
     temperature = 0.1  # 設定生成回覆的隨機度，值越小生成的回覆越穩定
     top_p = 0.3  # Top-p (nucleus) 抽樣的機率閾值，用於控制生成回覆的多樣性
     top_k = 5 # 調整Top-k值，以增加生成回覆的多樣性和避免生成重複的詞彙 
@@ -269,33 +269,92 @@ def agent(news):
         temperature=temperature,
         num_beams=1,
         top_p=top_p,
-        # top_k=top_k,
+        top_k=top_k,
         no_repeat_ngram_size=no_repeat_ngram_size,
         pad_token_id=2
-    )
-    
+    )    
     
     instruct = [
-        "你是一位資深金融投資者，請根據新聞內容提到的可能存在的投資獲利能力與風險進行分析，給出一個新聞結論，\
-        並給出適合該公司的投資獲利能力評級(投資獲利能立：1到10分，10分最高，1分最低)，\
-        以及風險評級(風險：1到10分，10分最高風險，1分最低風險)。研報內容：",  
+        f"你是一位資深金融投資者，請根據新聞內容提到公司{company_name}可能存在的發展與風險，請給出：\
+        1. 一新聞總結，\
+        2. 投資獲利能力評級(投資獲利能立：1到10分，10分最高，1分最低)，\
+        3. 風險評級(風險：1到10分，10分最高風險，1分最低風險)。新聞內容：",  
         ]
-    input = [title_concat]
-    output = evaluate(model, tokenizer, instruct[0], generation_config, max_len, input[0], verbose = False)
-    print(f'Output: {output}')
+    
+    
+    # Loop Method (How to use loop to replace a recurrence) 
+    """
+    Max number of news is max_news_accepted**2   
+    """
+    output_all = ''
+    output_tmp = ''
+    max_news_accepted = int(2048/max_len)
+       
+    keys = list(news.keys())[:max_news_accepted**2] 
+    news = {k: news[k] for k in keys}
+    for count, (link, infos) in enumerate(tqdm(news.items())):
+        time, title, content = infos
+    
+        input = [content]
+        if count % max_news_accepted == 0:
+            output_all += evaluate(model, tokenizer, instruct[0], generation_config, max_len, output_tmp, verbose = False) + '\n'
+            output_tmp = ''
+        output_tmp += evaluate(model, tokenizer, instruct[0], generation_config, max_len, input[0], verbose = False) + '\n'
         
-
-
+    print(f'Output: {evaluate(model, tokenizer, instruct[0], generation_config, max_len, output_all, verbose = False)}')
+    
+    
+    """
+    # Recurrence method
+    def summarise(content_list):
+        '''
+        - input: news (list)
+        - ouptut: concatenated summarised news 
+        '''
+        max_news_accepted = int(2048/max_len)
+        
+        if len(content_list) > max_news_accepted:
+            content_summary = ''
+            for i in range(int(np.ceil(len(content_list)//max_news_accepted))):
+                summaries = summarise(content_list[i*max_news_accepted:(i+1)*max_news_accepted]) + '\n'
+                content_summary += evaluate(model, tokenizer, instruct[0], generation_config, max_len, summaries, verbose = False) + '\n'
+                torch.cuda.empty_cache()
+            
+        else:
+            content_summaries = ''
+            for content in content_list:
+                content_summaries += evaluate(model, tokenizer, instruct[0], generation_config, max_len, content, verbose = False) + '\n'
+                torch.cuda.empty_cache()
+            return content_summaries
+        return content_summary
+    
+    content_all = []
+    for link, infos in news.items():
+        time, title, content = infos
+        content_all.append(content)
+    
+    output = summarise(content_all)
+    print(f'Output: {output}')
+    """
+        
+    
 
 
 if __name__ == "__main__":
-    task = input('Do you want "Stock Agent" (enter "sa") or "Sentiment Analysis" (enter "st")?')
+    task = input('Input "sa" for Stock Agent or "st" for Sentiment Analysis)?') or 'sa'
+    keyword = input('Enter the company name:') or '友達'
+    company_name = '友達'
+    print(f'Keyword: {keyword}, Company name: {company_name}')
     
-    news_ch, news_en = get_news_text('友達')
+    # Get news
+    news_ch, news_en = get_news_text(keyword)
+    
     if task == "sa":
-        agent(news_en)
+        # Model-Taide: Finetuned finance model, text to text,  with chinese llm
+        agent(company_name, news_ch)
         
     elif task == "st":
+        # Model-finBert: Finetuned finance model, text classification, with english llm
         senti_label = senti(news_en)
         senti_label = 'Positive' if senti_label == 1 else "Negative" if senti_label == 2 else "Neutral"
         print(f"Sentiment analysis for today's news: {senti_label}")

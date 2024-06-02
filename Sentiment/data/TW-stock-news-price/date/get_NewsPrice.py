@@ -97,8 +97,9 @@ def get_news_anue(NOW, KEYWORD ="大盤", start = None):
 
 def get_news_udn(KEYWORD ="大盤",  UPDATE_NEWS = False, start = None):
     """
-    - uls: [links]
-    - Data: {link: [date, title, content]}
+    - Data Store Format:  
+        - URL: {link: date}                          (file name end with _URL)
+        - News data: {link: [date, title, content]}  (file name end with _CH or _EN)
     """
     from tqdm import tqdm
     media = 'UDN'
