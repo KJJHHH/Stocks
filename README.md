@@ -8,8 +8,8 @@ Implementing various deep learning models in stock market analysis
 ### [Portfolio](https://github.com/KJJHHH/Stocks/tree/main/Portfolio)
 - Project from course NCCU machine learning and financial econemetrics  
 - Portfolio in stock, ML method on building portfolio
-### [Sentiment](https://github.com/KJJHHH/Stocks/tree/main/Sentiment)
+### [Sentiment_Advisor](https://github.com/KJJHHH/Stocks/tree/main/Sentiment_Advisor)
 - Enhancing Sentiment Analysis in News with Fine-Tuning Techniques for Language Models
-### [Stock Advisor]
+- Finetune LLM to be an investment advisor
 ### [Ensemble Trading](https://github.com/KJJHHH/Stocks/blob/main/ensemble-trade.ipynb)
 - Progressing...
