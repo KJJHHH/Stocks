@@ -4,8 +4,6 @@
 ## Introduction
 In this analysis, we evaluate the performance of sentiment analysis using the FinBERT model on two Taiwanese stocks: TW Stock 0050 and 2409. The study involves comparing the outcomes of pretraining and finetuning phases, accompanied by backtesting strategies to gauge asset performance.
 
-Additionally, we aim to leverage the insights gained from sentiment analysis to build a personal investment advisor. This advisor will summarize news articles and provide simple insights to assist investors in making informed decisions.
-
 
 ## Data
 - From UDN (經濟日報)
@@ -76,7 +74,7 @@ Additionally, we aim to leverage the insights gained from sentiment analysis to 
 
 # 2. Personal stock agent
 ## Introduction
-Additionally, we aim to leverage the insights gained from sentiment analysis to build a personal investment advisor. This advisor will summarize news articles and provide simple insights to assist investors in making informed decisions.
+We aim to leverage the insights gained from sentiment analysis to develop a personal investment advisor. This advisor will summarize news articles and provide clear, actionable insights to help investors make informed decisions.
 
 ## Data
 - [CFGPT](https://github.com/TongjiFinLab/CFGPT)
