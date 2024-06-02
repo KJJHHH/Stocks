@@ -10,4 +10,5 @@ Implementing various deep learning models in stock market analysis
 - Portfolio in stock, ML method on building portfolio
 ### [Sentiment](https://github.com/KJJHHH/Stocks/tree/main/Sentiment)
 - Enhancing Sentiment Analysis in News with Fine-Tuning Techniques for Language Models
-### [Ensemble Trading]()
+### [Ensemble Trading](https://github.com/KJJHHH/Stocks/blob/main/ensemble-trade.ipynb)
+- Progressing...
